@@ -1,5 +1,7 @@
 <img src="https://raw.github.com/karad/kurad/master/public/logo.png" alt="kurad logo" />
 
+version 0.1.3
+
 Admin tool for Play2 application.
 
 Kuradは、Play2アプリケーションのための管理ツールです。

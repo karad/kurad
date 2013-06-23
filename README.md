@@ -74,7 +74,36 @@ TwitterBootstrapを使っているためです。
 Contactには、Name、E-mail、Content、TEL、created、modifiedがフィールドとしてあります。
 
 よくあるお問い合わせフォームの内容です。
-Contactは下記のようなコードです。既にEbeanの設定などは済んでいることとします。
+Contactは下記のようなコードです。
+
+```
+package models;
+
+import .....;
+
+@Entity
+@Table(name="contacts")
+public class Contact extends Model {
+    
+    @Id
+    public Long identifier;
+    @Constraints.Required
+    public String name;
+    public String email;
+    @Column(columnDefinition = "TEXT")
+    public String content;
+    public String tel;
+    @Formats.DateTime(pattern="dd/MM/yyyy")
+    public Date created;
+    @Formats.DateTime(pattern="dd/MM/yyyy")
+    public Date modified = new Date();
+
+    .... getters and setters
+
+}
+```
+
+既にEbeanの設定などは済んでいることとします。
 済んでいない場合は、下記のような最低限の設定を行ってください。
 
 ```
@@ -106,32 +135,6 @@ ebean.default="models.*"
 
 アプリケーション名は「myApp」としました。
 
-```
-package models;
-
-import .....;
-
-@Entity
-@Table(name="contacts")
-public class Contact extends Model {
-    
-    @Id
-    public Long identifier;
-    @Constraints.Required
-    public String name;
-    public String email;
-    @Column(columnDefinition = "TEXT")
-    public String content;
-    public String tel;
-    @Formats.DateTime(pattern="dd/MM/yyyy")
-    public Date created;
-    @Formats.DateTime(pattern="dd/MM/yyyy")
-    public Date modified = new Date();
-
-    .... getters and setters
-
-}
-```
 
 ### STEP 2
 
@@ -228,7 +231,7 @@ kurad/templates以下に生成されます。
 --------------------------------------------------------------
 ```
 
-### STEP 3
+### STEP 4
 
 続いて、Kuradからモデルにアクセスできるように、publish-localコマンドを実行します。
 
@@ -272,7 +275,7 @@ libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
 になります。myappのところはアプリケーションにより異なります。
 1.0-SNAPSHOTのところにはプロジェクトのバージョン番号が入ります。
 
-### STEP 4
+### STEP 5
 
 一度コンソールを終了し、
 再びplayコンソールに入ります。
@@ -293,7 +296,7 @@ libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
 
 となります
 
-### STEP 5
+### STEP 6
 
 いよいよ、Ebeanモデル用の管理画面を出力していきます。
 ちなみに上記の設定は一度行えば次から行う必要はありません。
@@ -343,7 +346,7 @@ writing all files...
 --------------------------------------------------------------
 ```
 
-### STEP 6
+### STEP 7
 
 続いてContactモデルの生成も行いましょう。
 
@@ -393,7 +396,7 @@ writing all files...
 以上で、管理画面に必要なコードの生成は終了です。
 必要であればモデルごとに更にkurad allコマンドを実行してください。
 
-### STEP 7
+### STEP 8
 
 いよいよ管理画面にアクセスしてみます。runコマンドを実行してアプリケーションを立ち上げてください。
 

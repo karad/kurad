@@ -8,6 +8,7 @@ Admin tool for Play2 application
 
 Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツールです。
 簡単なAdmin画面を作成出来、モデル単位のテンプレートおよびロジックのカスタマイズが容易である点に優れています。
+
 新規にアプリケーションを作成する際や、既に存在しているアプリケーションにAdmin画面を組み込む場合を想定しています。
 アプリケーションへの実装が日々反映されていくような状況で、本体のコードと分離された形で管理画面の実装を進めていきたい場合に重宝します。
 デフォルトのUIフレームワークとしてTwitterBootstrapをサポートしています。
@@ -17,13 +18,13 @@ Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツ�
 ## Release note
 
 * 2013/06/23
-** version 0.1.2 released
+    * version 0.1.2 released
 
 * 2013/05/1
-** version 0.1.1 pre released (private)
+    * version 0.1.1 pre released (private)
 
 * 2013/01/27
-** version 0.1.0 pre released (private)
+    * version 0.1.0 pre released (private)
 
 ## インストール
 
@@ -40,7 +41,7 @@ addSbtPlugin("jp.greative" %% "kurad" % "0.1.2")
 resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/master/release/"
 ```
 
-Build.scalaに下記の依存関係を書きます
+Build.scalaに下記の依存関係を書きます。
 TwitterBootstrapを使っているためです。
 
 ```sbt
@@ -64,9 +65,11 @@ TwitterBootstrapを使っているためです。
 
 ### STEP 1
 
-まず、モデルを用意します
+まず、モデルを用意します。
 今回はmyAppという名前のアプリケーションにあるContactというモデルの管理画面を作ってみます。
+
 Contactには、Name、E-mail、Content、TEL、created、modifiedがフィールドとしてあります。
+
 よくあるお問い合わせフォームの内容です。
 Contactは下記のようなコードです。既にEbeanの設定などは済んでいることとします。
 済んでいない場合は、下記のような最低限の設定を行ってください。
@@ -132,6 +135,7 @@ public class Contact extends Model {
 
 Adminツールには、管理用のアカウントが必要です。
 管理画面用のアカウントは、Adminというモデルを作成する必要があります。
+
 Kuradには、admin用モデルを生成するツールが内包されています。
 Kuradのインストールを終えたら、下記のコマンドをPlayのコンソールでうちます。
 
@@ -224,7 +228,7 @@ kurad/templates以下に生成されます。
 
 ### STEP 3
 
-続いて、Kuradからモデルにアクセスできるように、publish-localコマンドを実行します
+続いて、Kuradからモデルにアクセスできるように、publish-localコマンドを実行します。
 
 ```
 [myApp] $ publish-local
@@ -269,11 +273,11 @@ libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
 ### STEP 4
 
 一度コンソールを終了し、
-再びplayコンソールに入ります
-プラグインの依存関係を再読み込みするためです
+再びplayコンソールに入ります。
+プラグインの依存関係を再読み込みするためです。
 
-続いて、kuradコマンドを実行します
-コマンドの実行形式は以下です
+続いて、kuradコマンドを実行します。
+コマンドの実行形式は以下です。
 
 ```sbt
 > [app_name] kurad all MODEL_NAME
@@ -389,7 +393,7 @@ writing all files...
 
 ### STEP 7
 
-いよいよ管理画面にアクセスしてみます。runコマンドを実行してアプリケーションを立ち上げてください
+いよいよ管理画面にアクセスしてみます。runコマンドを実行してアプリケーションを立ち上げてください。
 
 ```
 [myApp] $ run
@@ -442,7 +446,7 @@ kurad/templates/confディレクトリにkurad.confがあり、これをカス�
 
 ### テンプレートの編集
 
-APP_ROUTE/kurad/templates/に格納されています
+APP_ROUTE/kurad/templates/に格納されています。
 テンプレートエンジンにはmustacheを使っており、拡張子は.mustacheです。
 
 ### テンプレートタグ

@@ -1,0 +1,21 @@
+    /**
+     *
+     * @return
+     */
+    @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+    public static Result search() {
+        Form<SearchEngine.Form> form = form(SearchEngine.Form.class);
+        Form<SearchEngine.Form> filledForm = form.bindFromRequest();
+        String column = filledForm.field("column").valueOr("");
+        String keyword = filledForm.field("keyword").valueOr("");
+        String page = filledForm.field("page").valueOr("");
+
+        Option<Integer> pageMax = SearchEngine.getSearchMaxPage({{crudSetting.modelClass}}.class, column, keyword);
+        Option<List<{{crudSetting.modelClass}}>> model = SearchEngine.getSearchResult({{crudSetting.modelClass}}.class, column, keyword, page, pageMax.getOrElse(1));
+        Option<Integer> pageNumber = SearchEngine.toInt(page);
+        if(model.isDefined() && pageMax.isDefined() && pageNumber.isDefined()) {
+            return ok(index.render("{{crudSetting.modelClass}} : index", model.get(), pageNumber.get(), pageMax.get(), filledForm));
+        }
+        flash("error", Messages.get("stylyts.form.request"));
+        return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+    }

@@ -1,0 +1,32 @@
+package {{crudSetting.controllerPackage}};
+
+import java.util.List;
+
+// import libs.controller.action.AdminAction;
+// import libs.controller.action.BeforeAction;
+
+import {{crudSetting.controllerPackage}}.routes;
+
+import play.*;
+import play.mvc.*;
+import models.*;
+import {{crudSetting.servicePackage}}.*;
+import {{crudSetting.modelPackage}}.*;
+import views.html.crud.{{crudSetting.modelClass}}.*;
+import play.data.*;
+import play.i18n.Messages;
+import static play.libs.F.*;
+import {{crudSetting.servicePackage}}.DateUtil;
+import {{crudSetting.servicePackage}}.OptionUtil;
+
+// Play 2.1 support
+import static play.data.Form.*;
+
+/**
+ * {{crudSetting.controllerClass}}
+ */
+public class {{crudSetting.controllerClass}} extends Controller {      
+{{#methods}}
+{{{method}}}
+{{/methods}}
+}

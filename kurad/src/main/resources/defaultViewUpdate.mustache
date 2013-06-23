@@ -1,0 +1,39 @@
+@(title:String, bindForm:Form[{{crudSetting.modelPackage}}.{{crudSetting.modelClass}}], id:Long)
+
+@import helper._
+@import views.html.crud._
+
+@main_crud(title) {
+
+
+<h1>@title</h1>
+
+@if(flash.containsKey("success")) {
+    <p class="success alert alert-success">
+        <strong>@flash.get("success")</strong>
+    </p>
+} 
+@if(flash.containsKey("error")) {
+    <p class="error alert alert-error">
+        <strong>@flash.get("error")</strong>
+    </p>
+} 
+
+
+  @form(action = controllers.crud.routes.{{crudSetting.controllerClass}}.update(id)) {
+  <table class="table table-bordered">
+    <tbody>
+      {{{inputs}}}
+      <tr>
+        <th></th>
+        <td>
+          <input type="submit" value="Update" class="btn">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  }
+
+  <p><a class="btn btn-primary" href="@controllers.crud.routes.{{crudSetting.controllerClass}}.index(1)">&lt; {{crudSetting.modelClass}} Top</a></p>
+
+}

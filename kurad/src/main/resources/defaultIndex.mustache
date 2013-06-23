@@ -1,0 +1,11 @@
+  /**
+   * 
+   * @return
+   */
+  @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+  public static Result index(Integer page) {
+      List<{{crudSetting.modelClass}}> model = {{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.page(page);
+      Integer pageMax = {{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.pageMax(page);
+      Form<SearchEngine.Form> form = form(SearchEngine.Form.class);
+      return ok(index.render("{{crudSetting.modelClass}} : index", model, page, pageMax, form.fill(new SearchEngine.Form())));
+  }

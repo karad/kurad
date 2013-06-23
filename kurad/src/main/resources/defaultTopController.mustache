@@ -1,0 +1,33 @@
+package {{crudSetting.controllerPackage}};
+
+import java.util.List;
+// import libs.controller.action.AdminAction;
+// import libs.controller.action.BeforeAction;
+
+import {{crudSetting.controllerPackage}}.routes;
+
+import play.*;
+import play.mvc.*;
+import models.*;
+import {{crudSetting.servicePackage}}.*;
+import {{crudSetting.modelPackage}}.*;
+import views.html.crud.*;
+import play.data.*;
+import play.i18n.Messages;
+import static play.libs.F.*;
+import {{crudSetting.servicePackage}}.DateUtil;
+import {{crudSetting.servicePackage}}.OptionUtil;
+
+/**
+ * {{crudSetting.controllerTopClass}}
+ */
+public class {{crudSetting.controllerTopClass}} extends Controller {
+  /**
+   * 
+   * @return
+   */
+  @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+  public static Result index() {
+      return ok(top_crud.render("Top page"));
+  }
+}

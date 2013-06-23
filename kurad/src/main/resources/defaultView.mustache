@@ -1,0 +1,15 @@
+  /**
+   * 
+   * @param id
+   * @return
+   */
+  @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+  public static Result view(Long id) {
+      {{crudSetting.modelClass}} model = {{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.first(id);
+      if(model != null) {
+        return ok(detail.render("{{crudSetting.modelClass}} : view : " + id, model));
+      } else {
+        flash("error", Messages.get("stylyts.form.request"));
+        return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+      }
+  }

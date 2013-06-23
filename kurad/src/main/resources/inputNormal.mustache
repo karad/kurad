@@ -1,0 +1,4 @@
+<{{inputOption.wrappedElement}} id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
+<label for="{{model}}.{{name}}">{{name}}</label> : <input class="{{inputOption.inputClass}}" type="text" name="{{name}}" value="" id="{{model}}.{{name}}" />
+@if(!bindForm("{{name}}").errors().isEmpty()) { @Messages(bindForm("{{name}}").errors().get(0).message()) }
+</{{inputOption.wrappedElement}}>

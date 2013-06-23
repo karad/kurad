@@ -1,0 +1,229 @@
+package {{crudSetting.servicePackage}};
+
+import java.util.*;
+import javax.persistence.*;
+import play.db.ebean.*;
+import play.data.format.*;
+import play.data.validation.*;
+import models.*;
+import {{crudSetting.modelPackage}}.*;
+import static play.libs.F.*;
+import {{crudSetting.servicePackage}}.DateUtil;
+import {{crudSetting.servicePackage}}.OptionUtil;
+
+
+/**
+ * {{crudSetting.serviceClass}}{{crudSetting.serviceSuffix}}
+ * 
+ * @author harakazuhiro
+ */
+public class {{crudSetting.serviceClass}}{{crudSetting.serviceSuffix}} {
+
+    /**
+     * find all by list
+     * @return
+     */
+    public static List<{{crudSetting.modelClass}}> page(Integer pageSource) {
+        Integer page = (pageSource - 1 < 0) ? 0 : pageSource - 1;
+        Model.Finder<Long, {{crudSetting.modelClass}}> find = new Model.Finder<Long, {{crudSetting.modelClass}}>(Long.class, {{crudSetting.modelClass}}.class);
+        // return find.all();
+        return find.order().asc("created")
+                .findPagingList({{crudSetting.servicePackage}}.PagingSetting.LIMIT).getPage(page)
+                .getList();
+    }
+
+    /**
+     * find all by list
+     * @return
+     */
+    public static Integer pageMax(Integer pageSource) {
+        Integer page = (pageSource - 1 < 0) ? 0 : pageSource - 1;
+        Model.Finder<Long, {{crudSetting.modelClass}}> find = new Model.Finder<Long, {{crudSetting.modelClass}}>(Long.class, {{crudSetting.modelClass}}.class);
+        // return find.all();
+        return find.order().asc("created")
+                .findPagingList({{crudSetting.servicePackage}}.PagingSetting.LIMIT).getPage(page)
+                .getTotalPageCount();
+    }
+
+
+    /**
+     * find all by list
+     * @return
+     */
+    public static List<{{crudSetting.modelClass}}> all() {
+        Model.Finder<Long, {{crudSetting.modelClass}}> find = new Model.Finder<Long, {{crudSetting.modelClass}}>(Long.class, {{crudSetting.modelClass}}.class);
+        // return find.all();
+        return find.
+            {{#modelFetchFields}}
+            fetch("{{{modelFetchField}}}").
+            {{/modelFetchFields}}
+            findList();
+    }
+
+    /**
+     * find one
+     * @param id
+     * @return
+     */
+    public static {{crudSetting.modelClass}} first(Long id) {
+        Model.Finder<Long, {{crudSetting.modelClass}}> find = new Model.Finder<Long, {{crudSetting.modelClass}}>(Long.class, {{crudSetting.modelClass}}.class);
+        // return find.byId(id);
+        return find.
+            {{#modelFetchFields}}
+            fetch("{{{modelFetchField}}}").
+            {{/modelFetchFields}}
+            where().
+            eq("{{crudSetting.modelId}}", id).
+            findUnique();
+    }
+
+    /**
+     * create record
+     * @param model
+     * @param bindForm
+     * @return
+     */
+    public static {{crudSetting.modelClass}} create({{crudSetting.modelClass}} model, play.data.Form<{{crudSetting.modelClass}}> bindForm) {
+        model.setCreated(DateUtil.getCurrentDate());
+        {{#if crudSetting.modelHasModified}}
+        model.setModified(model.getCreated());
+        {{/if crudSetting.modelHasModified}}
+        try {
+            model.password = sha512(model.password);
+        } catch (java.security.NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        model.save();
+
+        if(bindForm != null) {
+{{#modelAddLogic}}
+            /**
+             * {{model}} {{member}}
+             */
+            Model.Finder<Long, {{model}}> {{member}}Finder = new Model.Finder<Long, {{model}}>(Long.class, {{model}}.class);
+            for (int i = 0; i < {{model}}{{crudSetting.modelSuffix}}.all().size(); i++) {
+                if(bindForm.field("{{member}}Ids[" + i + "]").value() != null) {
+                    model.{{member}}.add({{member}}Finder.by{{crudSetting.modelIdUpperCase}}(Long.valueOf(bindForm.field("{{member}}Ids[" + i + "]").value())));
+                }
+            }
+            model.saveManyToManyAssociations("{{member}}");
+{{/modelAddLogic}}
+
+        }
+
+        return model;
+    }
+
+
+    /**
+     * update record
+     * @param model
+     * @param id
+     * @param bindForm
+     * @return
+     */
+    public static {{crudSetting.modelClass}} update({{crudSetting.modelClass}} model, Long id, play.data.Form<{{crudSetting.modelClass}}> bindForm) {
+        {{crudSetting.modelClass}} entry;
+        if(id != null) {
+            entry = first(id);
+        } else {
+            entry = null;
+        }
+        if(entry != null) {
+            model.set{{crudSetting.modelIdUpperCase}}(id);
+            {{#if crudSetting.modelHasModified}}
+            model.setModified(DateUtil.getCurrentDate());
+            {{/if crudSetting.modelHasModified}}
+            //
+            try {
+                model.password = sha512(model.password);
+            } catch (java.security.NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
+            model.update();
+
+            if(bindForm != null) {
+{{#modelAddLogic}}
+                /**
+                 * {{model}} {{member}}
+                 */
+                Ebean.deleteManyToManyAssociations(model, "{{member}}");
+                Model.Finder<Long, {{model}}> {{member}}Finder = new Model.Finder<Long, {{model}}>(Long.class, {{model}}.class);
+                for (int i = 0; i < {{model}}{{crudSetting.serviceSuffix}}.all().size(); i++) {
+                    if(bindForm.field("{{member}}Ids[" + i + "]").value() != null) {
+                        model.{{member}}.add({{member}}Finder.by{{crudSetting.modelIdUpperCase}}(Long.valueOf(bindForm.field("{{member}}Ids[" + i + "]").value())));
+                    }
+                }
+                model.saveManyToManyAssociations("{{member}}");
+{{/modelAddLogic}}
+
+            }
+
+            return model;
+        }
+        return null;
+    }
+
+    /**
+     * delete record
+     * @param id
+     * @return
+     */
+    public static Option<{{crudSetting.modelClass}}> delete(Long id) {
+        Option<{{crudSetting.modelClass}}> model = OptionUtil.apply(first(id));
+        if(model.isDefined()) {
+            model.get().delete();
+        }
+        return model;
+    }
+
+{{#methods}}
+{{{method}}}
+{{/methods}}
+
+    /**
+     * hash util for password
+     * @param message
+     * @return
+     * @throws java.security.NoSuchAlgorithmException
+     */
+    public static String sha512(String message) throws  java.security.NoSuchAlgorithmException {
+        java.security.MessageDigest md = java.security.MessageDigest.getInstance("SHA-512");
+        String out = "";
+
+        md.update(message.getBytes());
+        byte[] mb = md.digest();
+        for (int i = 0; i < mb.length; i++) {
+            byte temp = mb[i];
+            String s = Integer.toHexString(new Byte(temp));
+            while (s.length() < 2) {
+                s = "0" + s;
+            }
+            s = s.substring(s.length() - 2);
+            out += s;
+        }
+        return out;
+    }
+
+    /**
+     * Authenticate a User.
+     */
+    public static {{crudSetting.modelClass}} authenticate(String username, String password) throws java.security.NoSuchAlgorithmException{
+        Model.Finder<Long,{{crudSetting.modelClass}}> find = new Model.Finder<Long, {{crudSetting.modelClass}}>(
+                Long.class, {{crudSetting.modelClass}}.class
+        );
+        String hashedPassword = "";
+        if(password != null) {
+            hashedPassword = sha512(password);
+        }
+        return find.where()
+                .eq("username", username)
+                .eq("password", hashedPassword)
+                .findUnique();
+    }
+
+
+
+}
+
+

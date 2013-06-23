@@ -1,0 +1,28 @@
+  /**
+   * 
+   * @param id
+   * @return
+   */
+  @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+  public static Result update(Long id) {
+      Form<{{crudSetting.modelClass}}> updateForm = form({{crudSetting.modelClass}}.class).bindFromRequest();
+      if(request().method().equals("POST")) {
+          if (updateForm.hasErrors()) {
+              flash("error", Messages.get("stylyts.form.error.all"));
+              return badRequest(update.render("Title", updateForm, id));
+          } else if(updateForm.value().isDefined()) {
+              {{crudSetting.modelClass}} model = {{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.update(updateForm.get(), id, updateForm);
+              if(model != null) {
+                  flash("success", model.{{crudSetting.modelId}} + " has been updated");
+              } else {
+                  flash("error", Messages.get("stylyts.form.error.update"));
+              }
+              return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+          } else {
+              flash("error", Messages.get("stylyts.form.request"));
+              return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+          }
+      } else {
+          return ok(update.render("{{crudSetting.modelClass}} : update : " + id, form({{crudSetting.modelClass}}.class).fill({{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.first(id)), id));
+      }
+  }

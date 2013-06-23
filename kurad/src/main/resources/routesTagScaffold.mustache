@@ -1,0 +1,14 @@
+#<routes path="{{controllerPath}}">
+GET     /crud/{{routesName}}/index         {{packageName}}.{{className}}.index(page:java.lang.Integer = 1)
+GET     /crud/{{routesName}}/index/        {{packageName}}.{{className}}.index(page:java.lang.Integer = 1)
+GET     /crud/{{routesName}}/index/:page   {{packageName}}.{{className}}.index(page:java.lang.Integer)
+GET     /crud/{{routesName}}               {{packageName}}.{{className}}.index(page:java.lang.Integer = 1)
+GET     /crud/{{routesName}}/              {{packageName}}.{{className}}.index(page:java.lang.Integer = 1)
+GET     /crud/{{routesName}}/view/:id      {{packageName}}.{{className}}.view(id:Long)
+POST    /crud/{{routesName}}/create        {{packageName}}.{{className}}.create()
+GET     /crud/{{routesName}}/create        {{packageName}}.{{className}}.create()
+POST    /crud/{{routesName}}/update/:id    {{packageName}}.{{className}}.update(id:Long)
+GET     /crud/{{routesName}}/update/:id    {{packageName}}.{{className}}.update(id:Long)
+POST    /crud/{{routesName}}/delete/:id    {{packageName}}.{{className}}.delete(id:Long)
+GET     /crud/{{routesName}}/search        {{packageName}}.{{className}}.search()
+#</routes path="{{controllerPath}}">

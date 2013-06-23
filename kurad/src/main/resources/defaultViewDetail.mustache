@@ -1,0 +1,29 @@
+@(title:String, model: {{crudSetting.modelPackage}}.{{crudSetting.modelClass}})
+
+@import views.html.crud._
+
+@main_crud(title) {
+
+<h1>@title</h1>
+
+@if(flash.containsKey("success")) {
+    <p class="success alert alert-success">
+        <strong>@flash.get("success")</strong>
+    </p>
+} 
+@if(flash.containsKey("error")) {
+    <p class="error alert alert-error">
+        <strong>@flash.get("error")</strong>
+    </p>
+} 
+
+
+<table class="table table-bordered">
+  <tbody>
+    {{{displayFields}}}
+  </tbody>
+</table>
+
+  <p><a class="btn btn-primary" href="@controllers.crud.routes.{{crudSetting.controllerClass}}.index(1)">&lt; {{crudSetting.modelClass}} Top</a></p>
+
+}

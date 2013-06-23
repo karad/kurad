@@ -1,0 +1,33 @@
+@(url: String, page: java.lang.Integer, maxPage: java.lang.Integer, display: java.lang.Integer = 5)
+
+@import {{crudSetting.servicePackage}}.Paging
+
+<div class="pagination">
+  <ul>
+
+@if(Paging.canPrevPage(page)) {
+<li><span><a href="@url/@Paging.getPrevPage(page)">&lt;</a></span></li>
+} else {
+<li><span><a href="#">&lt;</a></span></li>
+}
+
+@for(pagingBean <- Paging.getPagingList(page, maxPage, display)) {
+    @if(pagingBean.getCurrent) {
+    <li><span><a href="#">@pagingBean.getPage</a></span></li>
+    } else {
+    <li><span><a href="@url/@pagingBean.getPage">@pagingBean.getPage</a></span></li>
+    }
+}
+
+@if(Paging.getPagingList(page, maxPage, display).size().equals(0)) {
+    <li><span><a href="#">1</a></span></li>
+}
+
+@if(Paging.canNextPage(page, maxPage)) {
+<li><span><a href="@url/@Paging.getNextPage(page, maxPage)">&gt;</a></span></li>
+} else {
+<li><span><a href="#">&gt;</a></span></li>
+}
+
+  </ul>
+</div>

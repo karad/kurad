@@ -1,0 +1,24 @@
+  /**
+   * 
+   * @return
+   */
+  @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+  public static Result create() {
+      
+      if(request().method().equals("POST")) {
+          Form<{{crudSetting.modelClass}}> bindForm = form({{crudSetting.modelClass}}.class).bindFromRequest();
+          if (bindForm.hasErrors()) {
+              flash("error", Messages.get("stylyts.form.error.all"));
+              return badRequest(create.render("Title", bindForm));
+          } else if(bindForm.value().isDefined()) {
+              {{crudSetting.modelClass}} model = {{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.create(bindForm.get(), bindForm);
+              flash("success", model.{{crudSetting.modelId}} + " has been created");
+              return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+          } else {
+              flash("error", Messages.get("stylyts.form.request"));
+              return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+          }
+      } else {
+          return ok(create.render("{{crudSetting.modelClass}} : create", form({{crudSetting.modelClass}}.class).fill(new {{crudSetting.modelClass}}())));
+      }
+  }

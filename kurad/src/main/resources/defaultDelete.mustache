@@ -1,0 +1,18 @@
+  /**
+   * 
+   * @param id
+   * @return
+   */
+  @play.mvc.Security.Authenticated({{crudSetting.servicePackage}}.Secured.class)
+  public static Result delete(Long id) {
+      if (id != null) {
+          Option<{{crudSetting.modelClass}}> model = {{crudSetting.modelClass}}{{crudSetting.serviceSuffix}}.delete(id);
+          if(model.isDefined()) {
+              flash("success", model.get().{{crudSetting.modelId}} + " has been deleted");
+          } else {
+              flash("error", id + "cant deleted");
+          }
+
+      }
+      return redirect(routes.{{crudSetting.controllerClass}}.index(1));
+  }

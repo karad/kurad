@@ -1,0 +1,8 @@
+    public static Map<String, String> options{{model}}() {
+        Model.Finder<Long, {{model}}> find = new Model.Finder<Long, {{model}}>(Long.class, {{model}}.class);
+        LinkedHashMap<String, String> options = new LinkedHashMap<String, String>();
+        for ({{model}} model : find.all()) {
+            options.put(model.{{modelOption.modelId}}.toString(), model.{{modelOption.modelId}}.toString());
+        }
+        return options;
+    }

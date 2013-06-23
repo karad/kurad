@@ -1,0 +1,63 @@
+@(title:String, modelList: List[{{crudSetting.modelPackage}}.{{crudSetting.modelClass}}], page: java.lang.Integer, pageMax: java.lang.Integer, filledForm:Form[{{crudSetting.servicePackage}}.SearchEngine.Form])
+
+@import helper._
+@import views.html.crud._
+
+@main_crud(title) {
+
+<h1>@title</h1>
+
+    @form(action = controllers.crud.routes.{{crudSetting.controllerClass}}.search()) {
+        <table>
+            <tr>
+                <td>
+                  <select id="column" name="column" style="margin-bottom:0">
+                  {{#fields}}
+                  <option value="{{{fieldName}}}">{{{fieldName}}}</option>
+                  {{/fields}}
+                  </select>
+                @*<input name="column" id="column" type="text" placeholder="Column" style="margin-bottom:0" value="@filledForm("column").value" />*@
+                </td>
+                <td><input name="keyword" id="keyword" type="text" placeholder="Keywords" style="margin-bottom:0" value="@filledForm("keyword").value" /></td>
+                @*<td><input name="page" id="page" type="text" placeholder="Page" style="margin-bottom:0" value="@filledForm("page").value" /></td>*@
+                <td><input type="submit" value="Search" class="btn" /></td>
+            </tr>
+        </table>
+    }
+    
+<p><a class="btn btn-primary" href="@controllers.crud.routes.{{crudSetting.controllerClass}}.create()">create</a></p>
+
+@if(flash.containsKey("success")) {
+    <p class="success alert alert-success">
+        <strong>@flash.get("success")</strong>
+    </p>
+} 
+@if(flash.containsKey("error")) {
+    <p class="error alert alert-error">
+        <strong>@flash.get("error")</strong>
+    </p>
+} 
+
+
+<table class="table table-bordered">
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>Actions</th>
+    </tr>
+    @for(model <- modelList) {
+    <tr>
+      <td><a href="@controllers.crud.routes.{{crudSetting.controllerClass}}.view(model.{{crudSetting.modelId}})">@model.{{crudSetting.modelId}}</a></td>
+      <td>
+        @form(action = controllers.crud.routes.{{crudSetting.controllerClass}}.delete(model.{{crudSetting.modelId}}), 'class -> "topRight") {
+        <a class="btn" href="@controllers.crud.routes.{{crudSetting.controllerClass}}.update(model.{{crudSetting.modelId}})">update</a> <input type="submit" value="delete" class="btn btn-danger"/>
+        }
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+
+@views.html.crud.paginate(controllers.crud.routes.{{crudSetting.controllerClass}}.index(1).toString(), page, pageMax)
+
+}

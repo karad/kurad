@@ -1,0 +1,5 @@
+<tr id="{{listOption.wrappedId}}" class="{{listOption.wrappedClass}}">
+    <th>{{name}}</th>
+    <td>@Option(model.{{name}}).map { m => @if(!m.isEmpty) {<ul>} @for(h <- m) { <li>@h.{{modelId}}</li> } @if(!m.isEmpty) {</ul>} }
+    </td>
+</tr>

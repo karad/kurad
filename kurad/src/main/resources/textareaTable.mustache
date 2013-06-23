@@ -1,0 +1,7 @@
+<tr id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
+    <th><label for="{{model}}.{{name}}">{{name}}</label></th>
+    <td>
+        <textarea class="{{inputOption.inputClass}}" name="{{name}}" id="{{model}}.{{name}}">@bindForm("{{name}}").value</textarea>
+        @if(!bindForm("{{name}}").errors().isEmpty()) { @Messages(bindForm("{{name}}").errors().get(0).message()) }
+    </td>
+</tr>

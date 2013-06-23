@@ -1,0 +1,22 @@
+package {{crudSetting.servicePackage}};
+
+import {{crudSetting.modelPackage}}.Admin;
+import {{crudSetting.servicePackage}}.Admin{{crudSetting.serviceSuffix}};
+
+/**
+ * DESCRIPTION
+ *
+ * @author harakazuhiro
+ * @since 2013/06/15 10:02
+ */
+public class Login {
+    public String username;
+    public String password;
+
+    public String validate() throws java.security.NoSuchAlgorithmException {
+        if (Admin{{crudSetting.serviceSuffix}}.authenticate(username, password) == null) {
+            return "Invalid user or password";
+        }
+        return null;
+    }
+}

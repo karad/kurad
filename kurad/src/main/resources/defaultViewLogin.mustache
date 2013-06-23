@@ -1,0 +1,47 @@
+@(form: Form[{{crudSetting.servicePackage}}.Login])
+
+<html>
+    <head>
+        <title>Login</title>
+    </head>
+    <body style="background-color: #ccc; padding: 20px;">
+        
+        <header>
+            <h1 style="color: #fff">Login</h1>
+        </header>
+        
+        @helper.form({{crudSetting.controllerPackage}}.routes.Admin{{crudSetting.controllerSuffix}}.authenticate) {
+            
+            @if(form.hasGlobalErrors) { 
+                <p class="error" style="color: #933">
+                    @form.globalError.message
+                </p>
+            }
+            
+            @if(flash.contains("success")) {
+                <p class="success" style="color: #393">
+                    @flash.get("success")
+                </p>
+            }
+
+            <div style="border: 1px solid #aaa; padding: 10px 14px; margin-top: 10px; background-color: #fff; width: 300px">
+            
+            <p>
+                <input type="text" name="username" placeholder="Username" value="@form("username").value" style="padding: 4px 8px; height: 3em;">
+            </p>
+            <p>
+                <input type="password" name="password" placeholder="Password" style="padding: 4px 8px; height: 3em;">
+            </p>
+            <p>
+                <button type="submit" style="padding: 4px 8px; height: 3em;">Login</button>
+            </p>
+            
+            </div>
+        }
+        
+            
+    </body>
+</html>
+    
+
+

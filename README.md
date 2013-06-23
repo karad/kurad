@@ -1,8 +1,9 @@
 # {{{{ Kurad
 
-Admin tool for Play2 application
+Admin tool for Play2 application.
+Kuradは、Play2アプリケーションのための管理ツールです。
 
-## Kuradの概要
+## About Kurad
 
 <img src="https://raw.github.com/karad/kurad/master/public/logo.png" alt="kurad logo" />
 
@@ -11,6 +12,7 @@ Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツ�
 
 新規にアプリケーションを作成する際や、既に存在しているアプリケーションにAdmin画面を組み込む場合を想定しています。
 アプリケーションへの実装が日々反映されていくような状況で、本体のコードと分離された形で管理画面の実装を進めていきたい場合に重宝します。
+
 デフォルトのUIフレームワークとしてTwitterBootstrapをサポートしています。
 
 <img src="https://raw.github.com/karad/kurad/master/public/capt_top.png" alt="" />
@@ -31,7 +33,7 @@ Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツ�
 Kuradは、Play 2.0.4 Java、Play 2.1.1 Javaに対応しています。
 Scala版は将来的に対応するかもしれませんし、しないかもしれません。要望次第です。
 
-### Play 2.0.4およびPlay 2.1.1
+### Play 2.0.4 and Play 2.1.1
 
 plugins.sbtを下記のようにし、Playを起動します。
 
@@ -43,6 +45,8 @@ resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/m
 
 Build.scalaに下記の依存関係を書きます。
 TwitterBootstrapを使っているためです。
+
+#### 例 Play 2.1.1
 
 ```
   val appDependencies = Seq(
@@ -61,7 +65,7 @@ TwitterBootstrapを使っているためです。
   )
 ```
 
-## 使い方
+## Usage
 
 ### STEP 1
 
@@ -432,7 +436,7 @@ http://localhost:9000/crud/admin/create
 
 さあ、後は自由に管理画面を使ってPlayアプリを構築していきましょう。
 
-## カスタマイズ
+## Customize
 
 templateコマンドを実行すると、kuradで使われている様々なテンプレートファイルが生成されます。
 結果として、kurad/templates以下にテンプレートおよび設定ファイルが出来ます。
@@ -443,17 +447,17 @@ templateコマンドを実行すると、kuradで使われている様々なテ�
 
 kurad/templates/confディレクトリにkurad.confがあり、これをカスタマイズすることでモデルのディレクトリの変更や各種生成ルールを変更することが出来ます。
 
-### テンプレートの編集
+### Edit Template
 
 APP_ROUTE/kurad/templates/に格納されています。
 テンプレートエンジンにはmustacheを使っており、拡張子は.mustacheです。
 
-### テンプレートタグ
+### Template tag
 
 コンソールで設定した内容およびkurad.confの内容が出力可能です。
 このあたり、いずれリファレンスマニュアルを作成します。
 
-## ロードマップ
+## Roadmap
 
 * version 0.1.3
     * csrfフィルタの導入

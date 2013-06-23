@@ -24,7 +24,7 @@ Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツ�
 * 2013/01/27
     * version 0.1.0 pre released (private)
 
-## インストール
+## Install
 
 Kuradは、Play 2.0.4 Java、Play 2.1.1 Javaに対応しています。
 Scala版は将来的に対応するかもしれませんし、しないかもしれません。要望次第です。
@@ -42,7 +42,7 @@ resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/m
 Build.scalaに下記の依存関係を書きます。
 TwitterBootstrapを使っているためです。
 
-#### 例 Play 2.1.1
+#### Example. Play 2.1.1
 
 ```
   val appDependencies = Seq(

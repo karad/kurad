@@ -2,7 +2,7 @@
 
 version 0.1.3
 
-Admin tool for Play2 application.
+Admin tool for Play2 application.(English page will be coming soon.)
 
 Kuradは、Play2アプリケーションのための管理ツールです。
 

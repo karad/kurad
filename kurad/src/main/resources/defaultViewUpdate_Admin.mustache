@@ -42,7 +42,7 @@
       <tr id="" class="">
           <th><label for="models.Admin.password">password</label></th>
           <td>
-              <input class="" type="hidden" name="password" value="@bindForm("password").value" id="models.Admin.password" />
+              <input class="" type="password" name="password" value="@bindForm("password").value" id="models.Admin.password" />
               @if(!bindForm("password").errors().isEmpty()) { @Messages(bindForm("password").errors().get(0).message()) }
           </td>
       </tr>

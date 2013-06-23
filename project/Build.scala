@@ -36,9 +36,7 @@ object ApplicationBuild extends Build {
     settings = Defaults.defaultSettings ++ Seq(
       sbtPlugin := true,
       version := "0.1.2",
-      scalaBinaryVersion  := CrossVersion.binaryScalaVersion("2.9.2"),
       organization := "jp.greative",
-      scalaVersion := "2.10.0",
       publishMavenStyle := true,
       publishTo := Some(Resolver.file("maven-repo", file(mavenRepository))),
       libraryDependencies := sbtDependencies

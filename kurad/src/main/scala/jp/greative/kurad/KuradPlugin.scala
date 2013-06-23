@@ -3,17 +3,29 @@ package jp.greative.kurad
 import sbt._
 import Keys._
 import jp.greative.kurad.app.controller.{AdminController, TemplateController, CrudController}
+import jp.greative.kurad.app.model.mode.Mode
+import sbt.complete.Parser
 
 object KuradPlugin extends Plugin {
+
+  private[this] val modeList = Mode.values.filterNot(_ == Mode.NONE).map(_.name.toLowerCase)
+
+  private[this] val kuradParser: Parser[Either[(Mode, String), String]] = {
+    import sbt.complete.DefaultParsers._
+    val modes = modeList.map(m => token(m).map(Mode.is)).reduce(_ | _)
+    val modeParser = (Space ~> modes) ~ (Space ~> token(NotSpace, "<model-name>"))
+    val other = Space ~> (token("template") | token("admin"))
+    modeParser || other
+  }
 
   /**
    * opening kurad
    * @return
    */
-  def kuradBasic = Command.args(
-    "kurad",
-    "<all,service,controller,view,route,other> <MODEL_NAME>",
-    Help("kurad", ("kurad <all,service,controller,view,route,other> <MODEL_NAME>" , "make controller and views for model"), "make controller and views for model")) { (state:State, args) =>
+  def kuradBasic = Command(
+    "kurad", ("kurad", modeList.mkString("<",",","> <MODEL_NAME>")),
+    "make controller and views for model"
+  )(_ => kuradParser){ (state, args) =>
       println("")
       println("==============================================================")
       println("")
@@ -22,17 +34,17 @@ object KuradPlugin extends Plugin {
       println("==============================================================")
       println("")
 
-      (args, args.headOption) match {
-        case (v, mode:Some[String]) if v.size >= 2  => {
-          println( doKurad(mode, v.tail.headOption).getOrElse("") )
+      args match {
+        case Left((mode, model)) => {
+          println( doKurad(mode, model) )
         }
-        case (v, mode:Some[String]) if v.size == 1 && mode.getOrElse("").equals("template") => {
-          println( Colors.cyan("[mode]   ") + mode.getOrElse("") )
+        case Right(mode @ "template")=> {
+          println( Colors.cyan("[mode]   ") + mode )
           println("--------------------------------------------------------------")
           println( TemplateController.apply() )
         }
-        case (v, mode:Some[String]) if v.size == 1 && mode.getOrElse("").equals("admin") => {
-          println( Colors.cyan("[mode]   ") + mode.getOrElse("") )
+        case Right(mode @ "admin") => {
+          println( Colors.cyan("[mode]   ") + mode )
           println("--------------------------------------------------------------")
           println( AdminController.apply() )
         }
@@ -47,16 +59,11 @@ object KuradPlugin extends Plugin {
   /**
    * do kurad program
    */
-  def doKurad(mode: Option[String], modelName: Option[String]): Option[String] = {
-    (mode, modelName) match {
-      case (m:Some[_], n:Some[_]) => {
-        println(Colors.cyan("[mode]   ") + m.get)
-        println(Colors.cyan("[model]  ") + n.get)
-        println("--------------------------------------------------------------")
-        Option(new CrudController().apply(m.get, n.get))
-      }
-      case _ => scala.None
-    }
+  def doKurad(mode: Mode, modelName: String): String = {
+    println(Colors.cyan("[mode]   ") + mode)
+    println(Colors.cyan("[model]  ") + modelName)
+    println("--------------------------------------------------------------")
+    new CrudController().apply(mode.name, modelName)
   }
 
   /**

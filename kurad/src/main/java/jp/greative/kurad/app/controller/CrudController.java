@@ -31,6 +31,16 @@ public class CrudController extends DefaultController {
      */
     @Override
     public String apply(String mode, String model) {
+       return apply(Mode.is(mode), model);
+    }
+
+    /**
+     * execute method
+     * @param mode
+     * @param model
+     * @return
+     */
+    public String apply(Mode mode, String model) {
 
         // read setting
         Setting globalSetting = GlobalSetting.getInstance();
@@ -56,7 +66,7 @@ public class CrudController extends DefaultController {
             }
             LinkedHashMap<String, LinkedHashMap<String, Field>> modelsAndFields = ModelUtil.getFormList(crudSetting.getModelPackage(), crudSetting.getModelClass());
             if(modelsAndFields.containsKey(crudSetting.getModelNameWithPackage())) {
-                switch (Mode.is(mode)) {
+                switch (mode) {
                     case ALL:        result.addAll(all       (crudSetting).get()); break;
                     case SERVICE:    result.addAll(service   (crudSetting).get()); break;
                     case CONTROLLER: result.addAll(controller(crudSetting).get()); break;

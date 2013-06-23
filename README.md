@@ -4,7 +4,7 @@ Admin tool for Play2 application
 
 ## Kuradの概要
 
-<img align="right" src="https://raw.github.com/karad/kurad/master/public/logo.png" alt="kurad logo" />
+<img src="https://raw.github.com/karad/kurad/master/public/logo.png" alt="kurad logo" />
 
 Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツールです。
 簡単なAdmin画面を作成出来、モデル単位のテンプレートおよびロジックのカスタマイズが容易である点に優れています。

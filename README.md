@@ -425,7 +425,7 @@ app/controllers/crud/AdminCrudController.javaの61行目付近の@play.mvc.Secur
     }
 ```
 
-するとユーザ作成画面に入ることが出来ます。Playをrun下記URLにアクセスしてみてください。
+するとユーザ作成画面に入ることが出来ます。Playをrunして、下記URLにアクセスしてみてください。
 
 ```
 http://localhost:9000/crud/admin/create

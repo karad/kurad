@@ -35,7 +35,7 @@ Scala版は将来的に対応するかもしれませんし、しないかもし
 
 plugins.sbtを下記のようにし、Playを起動します。
 
-```sbt
+```
 addSbtPlugin("jp.greative" %% "kurad" % "0.1.2")
 
 resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/master/release/"
@@ -44,7 +44,7 @@ resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/m
 Build.scalaに下記の依存関係を書きます。
 TwitterBootstrapを使っているためです。
 
-```sbt
+```
   val appDependencies = Seq(
     // Add your project dependencies here,
     javaCore,
@@ -100,7 +100,6 @@ db.default.password=""
 #
 ebean.default="models.*"
 ```
-
 
 アプリケーション名は「myApp」としました。
 
@@ -253,7 +252,7 @@ publish-localしたjarをplugins.sbtにプロジェクト自体の読み込め�
 
 今回なら、
 
-```sbt
+```
 libraryDependencies += "myapp" % "myapp_2.9.1" % "1.0-SNAPSHOT"
 ```
 
@@ -263,7 +262,7 @@ libraryDependencies += "myapp" % "myapp_2.9.1" % "1.0-SNAPSHOT"
 
 今回なら、
 
-```sbt
+```
 libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
 ```
 
@@ -279,14 +278,14 @@ libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
 続いて、kuradコマンドを実行します。
 コマンドの実行形式は以下です。
 
-```sbt
-> [app_name] kurad all MODEL_NAME
+```
+[myApp] kurad all MODEL_NAME
 ```
 
 今回なら
 
-```sbt
-> [app_name] kurad all Contact
+```
+[myApp] kurad all Contact
 ```
 
 となります
@@ -423,7 +422,7 @@ app/controllers/crud/AdminCrudController.javaの61行目付近の@play.mvc.Secur
     }
 ```
 
-するとユーザ作成画面に入ることが出来ます。
+するとユーザ作成画面に入ることが出来ます。Playをrun下記URLにアクセスしてみてください。
 
 ```
 http://localhost:9000/crud/admin/create
@@ -438,8 +437,8 @@ http://localhost:9000/crud/admin/create
 templateコマンドを実行すると、kuradで使われている様々なテンプレートファイルが生成されます。
 結果として、kurad/templates以下にテンプレートおよび設定ファイルが出来ます。
 
-```sbt
-> [app_name] kurad template
+```
+[myApp] kurad template
 ```
 
 kurad/templates/confディレクトリにkurad.confがあり、これをカスタマイズすることでモデルのディレクトリの変更や各種生成ルールを変更することが出来ます。

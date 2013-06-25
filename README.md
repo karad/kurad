@@ -449,6 +449,22 @@ templateコマンドを実行すると、kuradで使われている様々なテ�
 
 kurad/templates/confディレクトリにkurad.confがあり、これをカスタマイズすることでモデルのディレクトリの変更や各種生成ルールを変更することが出来ます。
 
+### Kurad.conf
+
+#### Admin Menu
+
+デフォルトでは、Adminモデルに関するメニューが設定されています。
+
+```
+kurad.setting.view.menus=["Admin"]
+```
+
+ここを変更するとメニューに追加されます。例えば、Adminモデルの他に、ContactモデルやAddressモデルを追加したい場合は下記のようにします。
+
+```
+kurad.setting.view.menus=["Admin","Contact","Address"]
+```
+
 ### Edit Template
 
 APP_ROUTE/kurad/templates/に格納されています。

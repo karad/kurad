@@ -40,4 +40,9 @@ public enum Mode {
         }
         return NONE;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

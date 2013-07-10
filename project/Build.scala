@@ -1,6 +1,6 @@
 import sbt._
 import Keys._
-import PlayProject._
+import play.Project._
 import sbt.Defaults._
 // imports standard command parsing functionality
 import complete.DefaultParsers._
@@ -19,10 +19,13 @@ object ApplicationBuild extends Build {
 
   val appDependencies = Seq(
     // Add your project dependencies here,
+    javaCore,
+    javaJdbc,
+    javaEbean
 
   )
 
-  val main = PlayProject(appName, appVersion, appDependencies).settings(
+  val main = play.Project(appName, appVersion, appDependencies).settings(
    // Add your own project settings here      
     publishTo := Some(Resolver.file("maven-repo", file(mavenRepository)))
   ).aggregate(SbtPluginProject)
@@ -33,7 +36,7 @@ object ApplicationBuild extends Build {
     settings = Defaults.defaultSettings ++ Seq(
       sbtPlugin := true,
       version := "0.1.3.1",
-      // scalaBinaryVersion  := CrossVersion.binaryScalaVersion("2.9.2"),
+      scalaBinaryVersion  := CrossVersion.binaryScalaVersion("2.9.2"),
       organization := "jp.greative",
       publishMavenStyle := true,
       publishTo := Some(Resolver.file("maven-repo", file(mavenRepository))),
@@ -46,7 +49,7 @@ object ApplicationBuild extends Build {
   object Dependencies {
 
       val sbtDependencies = Seq(
-          "play" % "play_2.9.1" % "2.0.4"
+          "play" % "play_2.10" % "2.1.1"
           ,
           "com.novocode" % "junit-interface" % "0.8" % "test"
           ,
@@ -55,8 +58,8 @@ object ApplicationBuild extends Build {
           "com.github.spullara.mustache.java" % "compiler" % "0.8.8"
           ,
           "org.avaje.ebeanorm" % "avaje-ebeanorm" % "3.1.2"
-      )
 
+      )
   }
 
 }

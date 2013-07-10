@@ -1,6 +1,6 @@
 <img src="https://raw.github.com/karad/kurad/master/public/logo.png" alt="kurad logo" />
 
-version 0.1.3
+version 0.1.3.1
 
 Admin tool for Play2 application.(English page will be coming soon.)
 
@@ -20,6 +20,8 @@ Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツ�
 
 ## Release note
 
+* 2013/07/10
+    * version 0.1.3 released
 * 2013/06/23
     * version 0.1.3 released
 * 2013/06/21
@@ -37,7 +39,7 @@ Scala版は将来的に対応するかもしれませんし、しないかもし
 plugins.sbtを下記のようにし、Playを起動します。
 
 ```
-addSbtPlugin("jp.greative" %% "kurad" % "0.1.2")
+addSbtPlugin("jp.greative" %% "kurad" % "0.1.3.1")
 
 resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/master/release/"
 ```

@@ -21,7 +21,7 @@ Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツ�
 ## Release note
 
 * 2013/07/10
-    * version 0.1.3 released
+    * version 0.1.3.1 released
 * 2013/06/23
     * version 0.1.3 released
 * 2013/06/21

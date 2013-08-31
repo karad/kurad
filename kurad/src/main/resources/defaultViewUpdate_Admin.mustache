@@ -20,14 +20,14 @@
 } 
 
 
-  @form(action = controllers.crud.routes.{{crudSetting.controllerClass}}.update(id)) {
+  @form(action = helper.CSRF(controllers.crud.routes.{{crudSetting.controllerClass}}.update(id))) {
   <table class="table table-bordered">
     <tbody>
       <tr id="" class="">
-          <th><label for="models.Admin.identifier">identifier</label></th>
+          <th><label for="models.Admin.{{crudSetting.modelId}}">{{crudSetting.modelId}}</label></th>
           <td>
-              <input class="" type="text" name="identifier" value="@bindForm("identifier").value" id="models.Admin.identifier" />
-              @if(!bindForm("identifier").errors().isEmpty()) { @Messages(bindForm("identifier").errors().get(0).message()) }
+              <input class="" type="text" name="{{crudSetting.modelId}}" value="@bindForm("{{crudSetting.modelId}}").value" id="models.Admin.{{crudSetting.modelId}}" />
+              @if(!bindForm("{{crudSetting.modelId}}").errors().isEmpty()) { @Messages(bindForm("{{crudSetting.modelId}}").errors().get(0).message()) }
           </td>
       </tr>
 

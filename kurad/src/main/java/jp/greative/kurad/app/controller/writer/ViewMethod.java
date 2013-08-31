@@ -32,6 +32,12 @@ public enum ViewMethod {
         public List<String> apply(Matcher m) {
             return m.caseIsDetail();
         }
+    },
+    SEARCH("search") {
+        @Override
+        public List<String> apply(Matcher m) {
+            return m.caseIsSearch();
+        }
     };
 
     private String name;
@@ -49,6 +55,7 @@ public enum ViewMethod {
         List<String> caseIsCreate();
         List<String> caseIsUpdate();
         List<String> caseIsDetail();
+        List<String> caseIsSearch();
     }
 
     private ViewMethod(String s) {

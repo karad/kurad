@@ -30,6 +30,7 @@ public class TemplateController {
             add("defaultModel.mustache");
             add("defaultModelAdmin.mustache");
             add("defaultSearch.mustache");
+            add("defaultSecured.mustache");
             add("defaultTopController.mustache");
             add("defaultUpdate.mustache");
             add("defaultView.mustache");
@@ -37,7 +38,9 @@ public class TemplateController {
             add("defaultViewCreate.mustache");
             add("defaultViewDetail.mustache");
             add("defaultViewIndex.mustache");
+            add("defaultViewLogin.mustache");
             add("defaultViewMain.mustache");
+            add("defaultViewSearch.mustache");
             add("defaultViewTop.mustache");
             add("defaultViewUpdate_Admin.mustache");
             add("defaultViewUpdate.mustache");
@@ -50,16 +53,19 @@ public class TemplateController {
             add("listTable.mustache");
             add("listTableManyToMany.mustache");
             add("listTableManyToOne.mustache");
+            add("login.mustache");
             add("optionModel.mustache");
             add("optionUtil.mustache");
             add("paginate.mustache");
             add("paginateSetting.mustache");
             add("paging.mustache");
             add("pagingBean.mustache");
+            add("routesTagLogin.mustache");
             add("routesTagReg.mustache");
             add("routesTagScaffold.mustache");
             add("routesTagTop.mustache");
             add("searchEngine.mustache");
+            add("searchPaginate.mustache");
             add("textareaTable.mustache");
         }};
         String writePath = "kurad/templates";

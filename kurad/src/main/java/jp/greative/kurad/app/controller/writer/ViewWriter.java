@@ -81,6 +81,10 @@ public class ViewWriter extends DefaultWriter {
                 public List<String> caseIsDetail() {
                     return apply(baseName + crudSetting.getViewExtension(), path, crudSetting.getViewDetailTemplate(), crudSetting, new LinkedHashMap<String, String>());
                 }
+                @Override
+                public List<String> caseIsSearch() {
+                    return apply(baseName + crudSetting.getViewExtension(), path, crudSetting.getViewSearchTemplate(), crudSetting, new LinkedHashMap<String, String>());
+                }
             });
         }
         return apply(baseName, path, templateName, crudSetting, new LinkedHashMap<String, String>());

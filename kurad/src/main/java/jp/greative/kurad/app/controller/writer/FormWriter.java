@@ -6,6 +6,8 @@ import jp.greative.kurad.framework.model.contentType.Html;
 import jp.greative.kurad.framework.setting.InputSetting;
 import jp.greative.kurad.framework.setting.ListSetting;
 import jp.greative.kurad.app.setting.Output;
+import jp.greative.util.TextUtil;
+
 import javax.persistence.Column;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -149,6 +151,8 @@ public class FormWriter {
         InputSetting inputSetting = new InputSetting();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", name);
+        map.put("getName", TextUtil.toUpperCase(name));
+        map.put("setName", TextUtil.toUpperCase(name));
         map.put("model", model);
         map.put("inputOption", inputSetting);
         String templateName = "inputNormal";
@@ -167,6 +171,8 @@ public class FormWriter {
         InputSetting inputSetting = new InputSetting();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", name);
+        map.put("getName", TextUtil.toUpperCase(name));
+        map.put("setName", TextUtil.toUpperCase(name));
         map.put("model", model);
         map.put("inputOption", inputSetting);
         String templateName = "inputTable";

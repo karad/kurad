@@ -87,6 +87,8 @@ public class CrudSetting implements LocalSetting {
     private String viewUpdate = "update";
     /** view name for detail */
     private String viewDetail = "detail";
+    /** view name for search */
+    private String viewSearch = "search";
     /** view template name for index */
     private String viewIndexTemplate = "defaultViewIndex";
     /** view template name for create */
@@ -95,6 +97,8 @@ public class CrudSetting implements LocalSetting {
     private String viewUpdateTemplate = "defaultViewUpdate";
     /** view template name for detail */
     private String viewDetailTemplate = "defaultViewDetail";
+    /** view template name for search */
+    private String viewSearchTemplate = "defaultViewSearch";
     /** view layout package */
     private String viewLayoutPackage = "views.crud";
     /** view layout path */
@@ -194,6 +198,8 @@ public class CrudSetting implements LocalSetting {
         setMenus(config.getStringList("kurad.setting.view.menus"));
         setTemplateExtension(config.getString("kurad.setting.template.templateExtension"));
         setTemplatePath(config.getString("kurad.setting.template.templatePath"));
+        setViewSearchTemplate(config.getString("kurad.setting.view.viewSearchTemplate"));
+        setViewSearch(config.getString("kurad.setting.view.viewSearch"));
         return this;
     }
 
@@ -669,5 +675,19 @@ public class CrudSetting implements LocalSetting {
         this.templateExtension = templateExtension;
     }
 
+    public String getViewSearchTemplate() {
+        return viewSearchTemplate;
+    }
 
+    public void setViewSearchTemplate(String viewSearchTemplate) {
+        this.viewSearchTemplate = viewSearchTemplate;
+    }
+
+    public String getViewSearch() {
+        return viewSearch;
+    }
+
+    public void setViewSearch(String viewSearch) {
+        this.viewSearch = viewSearch;
+    }
 }

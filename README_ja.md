@@ -5,35 +5,23 @@ version 0.1.3.1
 Admin tool for Play2 application.(English page will be coming soon.)
 
 Kuradは、Play2アプリケーションのための管理ツールです。
-"Kurad" is a management tool for Play2 application.
 
 ## About Kurad
 
 Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツールです。
+簡単なAdmin画面を作成出来、モデル単位のテンプレートおよびロジックのカスタマイズが容易である点に優れています。
 
-It is a management tool for CRUD of Play 2.1.1 Java and Play 2.0.4 Java.
-
-簡単なAdmin画面を作成出来ます。
-モデル単位のテンプレートのカスタマイズが容易である点が優れています。
-
-You can create a simple Admin screen, 
-Template customization of the model unit is easy.
-
-kuradは、新規作成、開発中の両方で、アプリケーションの管理ツールを生成できます。
-本体のコードと分離された形で管理画面の実装を進めていきたい場合に重宝します。
-
-In both New, in development, kurad can generate a management tool for the application.
-
-kurad will come in handy if you want to do the implementation of management tools by separating the code of the application itself.
+新規にアプリケーションを作成する際や、既に存在しているアプリケーションにAdmin画面を組み込む場合を想定しています。
+アプリケーションへの実装が日々反映されていくような状況で、本体のコードと分離された形で管理画面の実装を進めていきたい場合に重宝します。
 
 デフォルトのUIフレームワークとしてTwitterBootstrapをサポートしています。
-
-I support TwitterBootstrap as the UI framework of default.
 
 <img src="https://raw.github.com/karad/kurad/master/public/capt_top.png" alt="" />
 
 ## Release note
 
+* 2013/07/25
+    * version 0.1.3.2 released
 * 2013/07/10
     * version 0.1.3.1 released
 * 2013/06/23
@@ -44,19 +32,13 @@ I support TwitterBootstrap as the UI framework of default.
     * version 0.1.0 pre released (private)
 
 ## Install
--------------------------------
 
 Kuradは、Play 2.0.4 Java、Play 2.1.1 Javaに対応しています。
 Scala版は将来的に対応するかもしれませんし、しないかもしれません。要望次第です。
 
-Kurad is compatible with Play 2.0.4 Java, to 2.1.1 Java Play.
-Scala version might respond in the future, and it may not. Demand is up to you.
-
 ### Play 2.0.4 and Play 2.1.1
 
 plugins.sbtを下記のようにし、Playを起動します。
-
-Try to keep the following plugins.sbt, and then start the Play.
 
 ```
 addSbtPlugin("jp.greative" %% "kurad" % "0.1.3.1")
@@ -66,9 +48,6 @@ resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/m
 
 Build.scalaに下記の依存関係を書きます。
 kuradがTwitterBootstrapを使っているためです。
-
-I write the following dependencies to Build.scala.
-This is because kurad is using TwitterBootstrap.
 
 #### Example. Play 2.1.1
 
@@ -96,18 +75,10 @@ This is because kurad is using TwitterBootstrap.
 まず、モデルを用意します。
 今回はmyAppという名前のアプリケーションにあるContactというモデルの管理画面を作ってみます。
 
-First, I will provide a model.
-I'll try to make the management of screen model called Contact in the application named myApp this time.
-
 Contactには、Name、E-mail、Content、TEL、created、modifiedがフィールドとしてあります。
-
-The Contact, there as a field Name, E-mail, Content, TEL, created, is modified.
 
 よくあるお問い合わせフォームの内容です。
 Contactは下記のようなコードです。
-
-The contents of the inquiry form with a well.
-Contact is the code as shown below.
 
 ```
 package models;
@@ -139,9 +110,6 @@ public class Contact extends Model {
 既にEbeanの設定などは済んでいることとします。
 済んでいない場合は、下記のような最低限の設定を行ってください。
 
-I suppose that such as setting Ebean lives already.
-If you have not already done so, please set the minimum as follows.
-
 ```
 # Database configuration
 # ~~~~~ 
@@ -171,21 +139,14 @@ ebean.default="models.*"
 
 アプリケーション名は「myApp」としました。
 
-I was made to "myApp" application name.
 
 ### STEP 2
 
 Adminツールには、管理用のアカウントが必要です。
 管理画面用のアカウントは、Adminというモデルを作成する必要があります。
 
-The Admin tool, you must have an account for management.
-The account management screen, you need to create a model called Admin.
-
 Kuradには、admin用モデルを生成するツールが内包されています。
 Kuradのインストールを終えたら、下記のコマンドをPlayのコンソールでうちます。
-
-The Kurad, a tool that generates admin for model is enclosed.
-When you have finished the installation of Kurad, Shoot in the console of the Play the following command.
 
 ```
 [myApp] $ kurad admin
@@ -193,9 +154,6 @@ When you have finished the installation of Kurad, Shoot in the console of the Pl
 
 すると下記のような実行結果が表示されます。
 デフォルトでは、app/models以下に生成されます。
-
-Then run the following results will be displayed.
-By default, this file is generated in the app / models below.
 
 ```
 ==============================================================
@@ -218,19 +176,12 @@ create model files...
 これらを変更すると、Admin画面をカスタマイズできます。
 下記コマンドをうちます。
 
-Then, you have generated in the project in the list of templates that contains the configuration files for configuration.
-If you change them, you can customize the Admin screen.
-I shoot the following command.
-
 ```
 [myApp] $ kurad template
 ```
 
 すると下記のような結果が出て、ファイルが生成されます。
 kurad/templates以下に生成されます。
-
-Then the following results came out, the file is generated.
-I is generated kurad / templates below.
 
 ```
 ==============================================================
@@ -288,15 +239,11 @@ I is generated kurad / templates below.
 
 続いて、Kuradからモデルにアクセスできるように、publish-localコマンドを実行します。
 
-Then, you will have access to the model from Kurad, and then run the publish-local command.
-
 ```
 [myApp] $ publish-local
 ```
 
 すると下記のように出力されます（抜粋）
-
-Then you will see output similar to the following (excerpt)
 
 ```
 [myApp] $ publish-local
@@ -309,19 +256,11 @@ Then you will see output similar to the following (excerpt)
 
 上記の出力結果のうち、今回のmyAppというアプリケーション名であれば、myapp_2.10がモジュールIDになります。また、myappがorganizationという形になります。アプリケーション名であるmyAppと違う点に注意してください。
 
-Of the output result of the above, if the application named myApp this, myapp_2.10 is the module ID. In addition, myapp is the form of organization. Please note that different from the myApp is the application name.
-
 publish-localしたjarをplugins.sbtにプロジェクト自体の読み込めるように設定します。
-
-Set to read the project itself to plugins.sbt the jar that you publish-local.
 
 #### Play 2.0.4の場合
 
-#### For Play 2.0.4
-
 今回なら、
-
-If this time,
 
 ```
 libraryDependencies += "myapp" % "myapp_2.9.1" % "1.0-SNAPSHOT"
@@ -329,15 +268,9 @@ libraryDependencies += "myapp" % "myapp_2.9.1" % "1.0-SNAPSHOT"
 
 上記のようになります。myappのところはアプリケーションにより異なります。また、アプリケーションのバージョン番号を指定している場合は1.0-SNAPSHOTのところを変更してください。
 
-Is as above. At myapp depends on the application. In addition, please change the place of the 1.0-SNAPSHOT if you specify the version number of the application.
-
 #### Play 2.1.1の場合
 
-#### For Play 2.1.1
-
 今回なら、
-
-If this time,
 
 ```
 libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
@@ -346,22 +279,14 @@ libraryDependencies += "myapp" % "myapp_2.10" % "1.0-SNAPSHOT"
 上記のようになります。myappのところはアプリケーションにより異なります。
 1.0-SNAPSHOTのところにはプロジェクトのバージョン番号が入ります。
 
-Is as above. At myapp depends on the application.
-Version number of the project will contain at the 1.0-SNAPSHOT.
-
 ### STEP 5
 
-一度コンソールを終了し、再びplayコンソールに入ります。
+一度コンソールを終了し、
+再びplayコンソールに入ります。
 プラグインの依存関係を再読み込みするためです。
-
-Exit the console once, to enter the play console again.
-This is to reload the dependency of the plug-in.
 
 続いて、kuradコマンドを実行します。
 コマンドの実行形式は以下です。
-
-Then, you can run the command kurad.
-Execution form of the command is as follows.
 
 ```
 [myApp] kurad all MODEL_NAME
@@ -369,35 +294,24 @@ Execution form of the command is as follows.
 
 今回なら
 
-If this time,
-
 ```
 [myApp] kurad all Contact
 ```
 
-上記のようになります。
-
-Is as above.
+上記のようになります
 
 ### STEP 6
 
 いよいよ、Ebeanモデル用の管理画面を出力していきます。
 ちなみに上記の設定は一度行えば次から行う必要はありません。
 
-Finally, I will continue to output the management screen Ebean models.
-By the way, you do not need to be performed from the following be performed once the above settings.
-
 まず、Adminモデルの管理画面を出力してみましょう。
-
-First, let's output the management of the Admin screen model.
 
 ```
 [myApp] $ kurad all Admin
 ```
 
 すると、下記のようにソースコードが生成された旨が表示されます。
-
-Then, that the source code was generated as described below will be displayed.
 
 ```
 ==============================================================
@@ -440,15 +354,11 @@ writing all files...
 
 続いてContactモデルの生成も行いましょう。
 
-Let's also creates Contact model followed.
-
 ```
 [myApp] $ kurad all Contact
 ```
 
-上記のように打ちます。すると下記のようにファイルが生成または上書きされます。
-
-I am out as described above. Then the file is overwritten or generated as described below.
+と打ちます。すると下記のようにファイルが生成または上書きされます。
 
 ```
 ==============================================================
@@ -490,22 +400,15 @@ writing all files...
 以上で、管理画面に必要なコードの生成は終了です。
 必要であればモデルごとに更にkurad allコマンドを実行してください。
 
-Above, generation of code required to manage screen is complete.
-Please execute kurad all further commands for each model if necessary.
-
 ### STEP 8
 
 いよいよ管理画面にアクセスしてみます。runコマンドを実行してアプリケーションを立ち上げてください。
-
-I try to access the management screen finally. Please launch the application by running the run command.
 
 ```
 [myApp] $ run
 ```
 
 デフォルトでは、管理画面のルーティングは、URL/crudに設定されています。
-
-By default, routing management screen, which is set to URL / crud.
 
 ```
 http://localhost:9000/crud
@@ -514,16 +417,10 @@ http://localhost:9000/crud
 にアクセスしてみましょう。
 すると下記の画面が表示されます。
 
-Let's have access to.
-Then the following screen appears.
-
 <img src="https://raw.github.com/karad/kurad/master/public/capt_login.png" alt="" />
 
 管理ユーザはまだいないのでログインができません。そこでログインユーザを作成します。
 app/controllers/crud/AdminCrudController.javaの61行目付近の@play.mvc.Security.Authenticatedアノテーションをコメントアウトします。
-
-You can not log in because not yet user management. So I will create a login user.
-I will comment out the line 61 near the app / controllers / crud / AdminCrudController.java the @ play.mvc.Security.Authenticated annotation.
 
 ```
     //@play.mvc.Security.Authenticated(models.crud.Secured.class)
@@ -537,8 +434,6 @@ I will comment out the line 61 near the app / controllers / crud / AdminCrudCont
 
 するとユーザ作成画面に入ることが出来ます。Playをrunして、下記URLにアクセスしてみてください。
 
-Then you can enter the user-created screen. To run the Play, please try to access the following URL.
-
 ```
 http://localhost:9000/crud/admin/create
 ```
@@ -547,15 +442,10 @@ http://localhost:9000/crud/admin/create
 
 さあ、後は自由に管理画面を使ってPlayアプリを構築していきましょう。
 
-Come on, let's build the Play application using the control screen freely after.
-
 ## Customize
 
 templateコマンドを実行すると、kuradで使われている様々なテンプレートファイルが生成されます。
 結果として、kurad/templates以下にテンプレートおよび設定ファイルが出来ます。
-
-When you run the command template, template various files that are used in kurad is generated.
-As a result, configuration files and templates can be kurad / templates below.
 
 ```
 [myApp] kurad template
@@ -563,23 +453,17 @@ As a result, configuration files and templates can be kurad / templates below.
 
 kurad/templates/confディレクトリにkurad.confがあり、これをカスタマイズすることでモデルのディレクトリの変更や各種生成ルールを変更することが出来ます。
 
-You can change a variety of generation rules to change directories and the model that there is a kurad.conf to kurad / templates / conf directory, to customize it.
-
 ### Kurad.conf
 
 #### Admin Menu
 
 デフォルトでは、Adminモデルに関するメニューが設定されています。
 
-By default, the Admin menu on the model has been set.
-
 ```
 kurad.setting.view.menus=["Admin"]
 ```
 
 ここを変更するとメニューに追加されます。例えば、Adminモデルの他に、ContactモデルやAddressモデルを追加したい場合は下記のようにします。
-
-It is added to the menu to change here. For example, do the following if in addition to the Admin model, you want to add the Address and Contact model model.
 
 ```
 kurad.setting.view.menus=["Admin","Contact","Address"]
@@ -590,24 +474,16 @@ kurad.setting.view.menus=["Admin","Contact","Address"]
 APP_ROUTE/kurad/templates/に格納されています。
 テンプレートエンジンにはmustacheを使っており、拡張子は.mustacheです。
 
-It is located in the APP_ROUTE / kurad / templates /.
-It uses the mustache in the template engine, extension is. Mustache.
-
 ### Template tag
 
 コンソールで設定した内容およびkurad.confの内容が出力可能です。
 このあたり、いずれリファレンスマニュアルを作成します。
 
-The contents of kurad.conf and what you have set in the console can be output.
-Around here, I will create a one reference manual.
-
 ## Roadmap
 
 * version 0.1.4
     * csrfフィルタのサポート
-    * Support of csrf filter
     * Adminモデルのカスタマイズ
-    * Customizing the Admin model
 
 ## Licence
 

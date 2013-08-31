@@ -19,7 +19,7 @@ import play.db.ebean.Model;
 public class Admin extends Model {
 
   @Id
-  public Long identifier;
+  public Long {{crudSetting.modelId}};
 
   @Constraints.Required
   public String username;
@@ -27,15 +27,22 @@ public class Admin extends Model {
   @Constraints.Required
   public String password;
 
+{{#if crudSetting.modelHasCreated}}
   @Formats.DateTime(pattern = "dd/MM/yyyy")
   public Date created; // timestamp
+{{/if crudSetting.modelHasCreated}}
 
-  public Long getIdentifier() {
-    return identifier;
+{{#if crudSetting.modelHasModified}}
+  @Formats.DateTime(pattern = "dd/MM/yyyy")
+  public Date modified; // timestamp
+{{/if crudSetting.modelHasModified}}
+
+  public Long get{{crudSetting.modelIdUpperCase}}() {
+    return {{crudSetting.modelId}};
   }
 
-  public void setIdentifier(Long identifier) {
-    this.identifier = identifier;
+  public void set{{crudSetting.modelIdUpperCase}}(Long {{crudSetting.modelId}}) {
+    this.{{crudSetting.modelId}} = {{crudSetting.modelId}};
   }
 
   public String getUsername() {
@@ -61,4 +68,14 @@ public class Admin extends Model {
   public void setCreated(Date created) {
     this.created = created;
   }
+
+{{#if crudSetting.modelHasModified}}
+  public Date getModified() {
+    return modified;
+  }
+
+  public void setModified(Date modified) {
+    this.modified = modified;
+  }
+{{/if crudSetting.modelHasModified}}
 }

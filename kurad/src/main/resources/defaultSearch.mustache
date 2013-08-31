@@ -14,7 +14,7 @@
         Option<List<{{crudSetting.modelClass}}>> model = SearchEngine.getSearchResult({{crudSetting.modelClass}}.class, column, keyword, page, pageMax.getOrElse(1));
         Option<Integer> pageNumber = SearchEngine.toInt(page);
         if(model.isDefined() && pageMax.isDefined() && pageNumber.isDefined()) {
-            return ok(index.render("{{crudSetting.modelClass}} : index", model.get(), pageNumber.get(), pageMax.get(), filledForm));
+            return ok(search.render("{{crudSetting.modelClass}} : index", model.get(), pageNumber.get(), pageMax.get(), filledForm, column, keyword));
         }
         flash("error", Messages.get("stylyts.form.request"));
         return redirect(routes.{{crudSetting.controllerClass}}.index(1));

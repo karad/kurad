@@ -1,4 +1,4 @@
-@(title:String, modelList: List[{{crudSetting.modelPackage}}.{{crudSetting.modelClass}}], page: java.lang.Integer, pageMax: java.lang.Integer, filledForm:Form[{{crudSetting.servicePackage}}.SearchEngine.Form])
+@(title:String, modelList: List[{{crudSetting.modelPackage}}.{{crudSetting.modelClass}}], page: java.lang.Integer, pageMax: java.lang.Integer, filledForm:Form[{{crudSetting.servicePackage}}.SearchEngine.Form], column:String, keyword:String)
 
 @import helper._
 @import views.html.crud._
@@ -7,7 +7,7 @@
 
 <h1>@title</h1>
 
-    @form(helper.CSRF(action = controllers.crud.routes.{{crudSetting.controllerClass}}.search())) {
+    @form(action = helper.CSRF(controllers.crud.routes.{{crudSetting.controllerClass}}.search())) {
         <table>
             <tr>
                 <td>
@@ -58,6 +58,6 @@
   </tbody>
 </table>
 
-@views.html.crud.paginate(controllers.crud.routes.{{crudSetting.controllerClass}}.index(1).toString(), page, pageMax)
+@views.html.crud.search_paginate(controllers.crud.routes.{{crudSetting.controllerClass}}.search().toString(), page, pageMax, column, keyword)
 
 }

@@ -5,14 +5,12 @@ import sbt.Defaults._
 // imports standard command parsing functionality
 import complete.DefaultParsers._
 
-
-
 object ApplicationBuild extends Build {
 
   import Dependencies._
 
   val appName         = "kurad_app"
-  val appVersion      = "0.1.3.1"
+  val appVersion      = "0.1.3.4"
   val releases        = "/Users/harakazuhiro/gitrepo/maven-repo/release"
   val snapshot        = "/Users/harakazuhiro/gitrepo/maven-repo/snapshots"
   val mavenRepository = if (appVersion.endsWith("SNAPSHOT")) snapshot else releases
@@ -35,7 +33,7 @@ object ApplicationBuild extends Build {
     file("kurad"),
     settings = Defaults.defaultSettings ++ Seq(
       sbtPlugin := true,
-      version := "0.1.3.1",
+      version := "0.1.3.4",
       scalaBinaryVersion  := CrossVersion.binaryScalaVersion("2.9.2"),
       organization := "jp.greative",
       publishMavenStyle := true,
@@ -43,23 +41,25 @@ object ApplicationBuild extends Build {
       libraryDependencies := sbtDependencies
       //,
       //commands ++= Seq(jp.greative.kurad.KuradPlugin.kuradBasic)
-
     )
   )
+
   object Dependencies {
 
-      val sbtDependencies = Seq(
-          "play" % "play_2.10" % "2.1.1"
-          ,
-          "com.novocode" % "junit-interface" % "0.8" % "test"
-          ,
-          "junit" % "junit" % "3.8.1" % "test"
-          ,
-          "com.github.spullara.mustache.java" % "compiler" % "0.8.8"
-          ,
-          "org.avaje.ebeanorm" % "avaje-ebeanorm" % "3.1.2"
+    val sbtDependencies = Seq(
+        "play" % "play_2.10" % "2.1.3"
+        ,
+        "com.novocode" % "junit-interface" % "0.8" % "test"
+        ,
+        "junit" % "junit" % "3.8.1" % "test"
+        ,
+        "com.github.spullara.mustache.java" % "compiler" % "0.8.8"
+        ,
+        "org.avaje.ebeanorm" % "avaje-ebeanorm" % "3.1.2"
+        ,
+        "org.easytesting" % "fest-assert-core" % "2.0M8"
 
-      )
+    )
   }
 
 }

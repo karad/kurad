@@ -10,7 +10,7 @@
             <h1 style="color: #fff">Login</h1>
         </header>
         
-        @helper.form({{crudSetting.controllerPackage}}.routes.Admin{{crudSetting.controllerSuffix}}.authenticate) {
+        @helper.form(action = helper.CSRF({{crudSetting.controllerPackage}}.routes.Admin{{crudSetting.controllerSuffix}}.authenticate)) {
             
             @if(form.hasGlobalErrors) { 
                 <p class="error" style="color: #933">

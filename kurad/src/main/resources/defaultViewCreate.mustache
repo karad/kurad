@@ -19,7 +19,7 @@
 } 
 
 
-  @form(action = controllers.crud.routes.{{crudSetting.controllerClass}}.create()) {
+  @form(action = helper.CSRF(controllers.crud.routes.{{crudSetting.controllerClass}}.create())) {
   <table class="table table-bordered">
     <tbody>
       {{{inputs}}}

@@ -129,6 +129,7 @@ public class CrudController extends DefaultController {
 
         // paginate
         result.addAll(new ServiceWriter().apply("paginate" + crudSetting.getViewExtension(), crudSetting.getViewPath(), "paginate", crudSetting, new LinkedHashMap<String, String>()));
+        result.addAll(new ServiceWriter().apply("search_paginate" + crudSetting.getViewExtension(), crudSetting.getViewPath(), "searchPaginate", crudSetting, new LinkedHashMap<String, String>()));
 
         // DateUtil.java
         result.addAll(new ServiceWriter().apply("DateUtil" + crudSetting.getExtension(), crudSetting.getServicePath(), "dateUtil", crudSetting, new LinkedHashMap<String, String>()));
@@ -141,6 +142,7 @@ public class CrudController extends DefaultController {
         result.addAll(new ViewWriter().apply("create", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
         result.addAll(new ViewWriter().apply("update", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
         result.addAll(new ViewWriter().apply("detail", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
+        result.addAll(new ViewWriter().apply("search", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
 
         // routes
 
@@ -233,6 +235,7 @@ public class CrudController extends DefaultController {
         result.addAll(new ViewWriter().apply("create", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
         result.addAll(new ViewWriter().apply("update", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
         result.addAll(new ViewWriter().apply("detail", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
+        result.addAll(new ViewWriter().apply("search", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
         return result;
     }
 
@@ -277,6 +280,7 @@ public class CrudController extends DefaultController {
 
         // paginate
         result.addAll(new ServiceWriter().apply("paginate" + crudSetting.getViewExtension(), crudSetting.getViewPath(), "paginate", crudSetting, new LinkedHashMap<String, String>()));
+        result.addAll(new ServiceWriter().apply("searchPaginate" + crudSetting.getViewExtension(), crudSetting.getViewPath(), "searchPaginate", crudSetting, new LinkedHashMap<String, String>()));
 
         // DateUtil.java
         result.addAll(new ServiceWriter().apply("DateUtil" + crudSetting.getExtension(), crudSetting.getServicePath(), "dateUtil", crudSetting, new LinkedHashMap<String, String>()));

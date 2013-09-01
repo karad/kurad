@@ -1,17 +1,18 @@
 <img src="https://raw.github.com/karad/kurad/master/public/logo.png" alt="kurad logo" />
 
-version 0.1.3.1
+version 0.1.4
 
 Admin tool for Play2 application.(English page will be coming soon.)
 
 Kuradは、Play2アプリケーションのための管理ツールです。
+
 "Kurad" is a management tool for Play2 application.
 
 ## About Kurad
 
-Play 2.0.4 Java、Play 2.1.1 Java用のCRUDをベースとした管理画面ツールです。
+<strike>Play 2.0.4 Java、</strike>Play 2.1.3 Java用のCRUDをベースとした管理画面ツールです。
 
-It is a management tool for CRUD of Play 2.1.1 Java and Play 2.0.4 Java.
+It is a management tool for CRUD of Play 2.1.3 Java and <strike>Play 2.0.4 Java</strike>.
 
 簡単なAdmin画面を作成出来ます。
 モデル単位のテンプレートのカスタマイズが容易である点が優れています。
@@ -34,6 +35,12 @@ I support TwitterBootstrap as the UI framework of default.
 
 ## Release note
 
+* 2013/08/31
+    * version 0.1.4 released
+        * Support of CSRF filter
+        * Can edit Admin model id property name in kurad.conf
+        * Fix some bugs...
+        * Not support Play 2.0.4 Java
 * 2013/07/10
     * version 0.1.3.1 released
 * 2013/06/23
@@ -46,13 +53,13 @@ I support TwitterBootstrap as the UI framework of default.
 ## Install
 -------------------------------
 
-Kuradは、Play 2.0.4 Java、Play 2.1.1 Javaに対応しています。
+Kuradは、<strike>Play 2.0.4 Java、</strike>Play 2.1.3 Javaに対応しています。
 Scala版は将来的に対応するかもしれませんし、しないかもしれません。要望次第です。
 
-Kurad is compatible with Play 2.0.4 Java, to 2.1.1 Java Play.
+Kurad is compatible with <strike>Play 2.0.4 Java, to </strike>2.1.3 Java Play.
 Scala version might respond in the future, and it may not. Demand is up to you.
 
-### Play 2.0.4 and Play 2.1.1
+### <strike>Play 2.0.4 and </strike>Play 2.1.3
 
 plugins.sbtを下記のようにし、Playを起動します。
 
@@ -65,19 +72,20 @@ resolvers += "Greative Repository" at "https://github.com/karad/maven-repo/raw/m
 ```
 
 Build.scalaに下記の依存関係を書きます。
-kuradがTwitterBootstrapを使っているためです。
+kuradがTwitterBootstrapを使っているためです。また、CSRFフィルターを使うためのfiltersも依存関係に記述します。
 
 I write the following dependencies to Build.scala.
 This is because kurad is using TwitterBootstrap.
 
-#### Example. Play 2.1.1
+#### Example. Play 2.1.3
 
 ```
   val appDependencies = Seq(
     // Add your project dependencies here,
     javaCore,
     javaJdbc,
-    javaEbean
+    javaEbean,
+    filters,
     ,"com.github.twitter" % "bootstrap" % "2.0.2"
   )
 ```
@@ -172,6 +180,17 @@ ebean.default="models.*"
 アプリケーション名は「myApp」としました。
 
 I was made to "myApp" application name.
+
+また、CSRFフィルターを有効にするためにapp/Global.java（ない場合は作成します）に下記のメソッドを追記します。Global.javaの作り方はPlay frameworkのマニュアルなどを参照ください。
+
+```
+    @Override
+    public <T extends EssentialFilter> Class<T>[] filters() {
+        return new Class[]{
+                CSRFFilter.class
+        };
+    }
+```
 
 ### STEP 2
 
@@ -315,7 +334,7 @@ publish-localしたjarをplugins.sbtにプロジェクト自体の読み込め�
 
 Set to read the project itself to plugins.sbt the jar that you publish-local.
 
-#### Play 2.0.4の場合
+#### Play 2.0.4の場合(not working)
 
 #### For Play 2.0.4
 
@@ -331,9 +350,9 @@ libraryDependencies += "myapp" % "myapp_2.9.1" % "1.0-SNAPSHOT"
 
 Is as above. At myapp depends on the application. In addition, please change the place of the 1.0-SNAPSHOT if you specify the version number of the application.
 
-#### Play 2.1.1の場合
+#### Play 2.1.3の場合
 
-#### For Play 2.1.1
+#### For Play 2.1.3
 
 今回なら、
 

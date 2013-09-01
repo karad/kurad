@@ -204,7 +204,7 @@ Kuradには、admin用モデルを生成するツールが内包されていま�
 Kuradのインストールを終えたら、下記のコマンドをPlayのコンソールでうちます。
 
 The Kurad, a tool that generates admin for model is enclosed.
-When you have finished the installation of Kurad, Shoot in the console of the Play the following command.
+When you have finished the installation of Kurad, Type in the console of the Play the following command.
 
 ```
 [myApp] $ kurad admin
@@ -239,7 +239,7 @@ create model files...
 
 Then, you have generated in the project in the list of templates that contains the configuration files for configuration.
 If you change them, you can customize the Admin screen.
-I shoot the following command.
+I type the following command.
 
 ```
 [myApp] $ kurad template
@@ -249,7 +249,7 @@ I shoot the following command.
 kurad/templates以下に生成されます。
 
 Then the following results came out, the file is generated.
-I is generated kurad / templates below.
+I is generated kurad/templates below.
 
 ```
 ==============================================================
@@ -524,7 +524,7 @@ I try to access the management screen finally. Please launch the application by 
 
 デフォルトでは、管理画面のルーティングは、URL/crudに設定されています。
 
-By default, routing management screen, which is set to URL / crud.
+By default, routing management screen, which is set to URL /crud.
 
 ```
 http://localhost:9000/crud
@@ -542,7 +542,7 @@ Then the following screen appears.
 app/controllers/crud/AdminCrudController.javaの61行目付近の@play.mvc.Security.Authenticatedアノテーションをコメントアウトします。
 
 You can not log in because not yet user management. So I will create a login user.
-I will comment out the line 61 near the app / controllers / crud / AdminCrudController.java the @ play.mvc.Security.Authenticated annotation.
+I will comment out the line 61 near the app/controllers/crud/AdminCrudController.java the @ play.mvc.Security.Authenticated annotation.
 
 ```
     //@play.mvc.Security.Authenticated(models.crud.Secured.class)
@@ -574,7 +574,7 @@ templateコマンドを実行すると、kuradで使われている様々なテ�
 結果として、kurad/templates以下にテンプレートおよび設定ファイルが出来ます。
 
 When you run the command template, template various files that are used in kurad is generated.
-As a result, configuration files and templates can be kurad / templates below.
+As a result, configuration files and templates can be kurad/templates below.
 
 ```
 [myApp] kurad template
@@ -582,7 +582,7 @@ As a result, configuration files and templates can be kurad / templates below.
 
 kurad/templates/confディレクトリにkurad.confがあり、これをカスタマイズすることでモデルのディレクトリの変更や各種生成ルールを変更することが出来ます。
 
-You can change a variety of generation rules to change directories and the model that there is a kurad.conf to kurad / templates / conf directory, to customize it.
+You can change a variety of generation rules to change directories and the model that there is a kurad.conf to kurad/templates/conf directory, to customize it.
 
 ### Kurad.conf
 
@@ -609,8 +609,8 @@ kurad.setting.view.menus=["Admin","Contact","Address"]
 APP_ROUTE/kurad/templates/に格納されています。
 テンプレートエンジンにはmustacheを使っており、拡張子は.mustacheです。
 
-It is located in the APP_ROUTE / kurad / templates /.
-It uses the mustache in the template engine, extension is. Mustache.
+It is located in the APP_ROUTE/kurad/templates/.
+It uses the mustache in the template engine, extension is .mustache.
 
 ### Template tag
 
@@ -618,7 +618,7 @@ It uses the mustache in the template engine, extension is. Mustache.
 このあたり、いずれリファレンスマニュアルを作成します。
 
 The contents of kurad.conf and what you have set in the console can be output.
-Around here, I will create a one reference manual.
+I will create a one reference manual.
 
 ## Roadmap
 

@@ -41,6 +41,7 @@ public class GlobalSetting implements Setting {
         } else {
             return new None<Config>();
         }
+
     }
 
     /**

@@ -7,7 +7,7 @@
 
 <h1>@title</h1>
 
-    @form(helper.CSRF(action = controllers.crud.routes.{{crudSetting.controllerClass}}.search())) {
+    @form(action = helper.CSRF(controllers.crud.routes.{{crudSetting.controllerClass}}.search())) {
         <table>
             <tr>
                 <td>

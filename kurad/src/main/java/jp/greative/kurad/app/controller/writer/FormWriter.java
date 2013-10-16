@@ -233,7 +233,7 @@ public class FormWriter {
         map.put("targetClassName", targetClassName);
         map.put("declaredClassName", declaredClassName);
         map.put("listOption", listSetting);
-        map.put("modelId", Output.getModelId());
+        map.put("modelId", crudSetting.getModelId());
         String templateName = "listTableManyToOne";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }
@@ -256,7 +256,7 @@ public class FormWriter {
         map.put("targetClassName", targetClassName);
         map.put("declaredClassName", declaredClassName);
         map.put("listOption", listSetting);
-        map.put("modelId", Output.getModelId());
+        map.put("modelId", crudSetting.getModelId());
         String templateName = "listTableManyToMany";
         return DefaultTemplate.view(templateName, crudSetting, map);
 
@@ -280,7 +280,7 @@ public class FormWriter {
         map.put("targetClassName", targetClassName);
         map.put("declaredClassName", declaredClassName);
         map.put("inputOption", inputSetting);
-        map.put("modelId", Output.getModelId());
+        map.put("modelId", crudSetting.getModelId());
         String templateName = "inputTableWithManyToOne";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }
@@ -303,7 +303,7 @@ public class FormWriter {
         map.put("inputOption", inputSetting);
         map.put("targetClassName", targetClassName);
         map.put("declaredClassName", declaredClassName);
-        map.put("modelId", Output.getModelId());
+        map.put("modelId", crudSetting.getModelId());
         String templateName = "inputTableWithManyToMany";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }

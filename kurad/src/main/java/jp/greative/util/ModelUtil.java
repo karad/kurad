@@ -89,7 +89,7 @@ public class ModelUtil {
         for(String key : i) {
             for(Annotation annotation : fields.get(key).getAnnotations()) {
                 if(
-                        annotation instanceof OneToOne ||
+                        annotation instanceof OneToMany ||
                         annotation instanceof ManyToMany
                 ) {
                     ParameterizedType parameterizedType  = (ParameterizedType)fields.get(key).getGenericType();
@@ -146,6 +146,7 @@ public class ModelUtil {
                         annotation instanceof OneToMany ||
                         annotation instanceof ManyToMany
                 ) {
+                    System.out.println(fields.get(key).getGenericType());
                     ParameterizedType parameterizedType  = (ParameterizedType)fields.get(key).getGenericType();
                     Class paramCls = (Class)parameterizedType.getActualTypeArguments()[0];
                     results.add(getOptionMethod(paramCls.getSimpleName(), modelId, crudSetting));
@@ -165,6 +166,8 @@ public class ModelUtil {
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("model", model);
         map.put("modelId", modelId);
+        map.put("crudSetting", crudSetting);
+
         return DefaultTemplate.view("optionModel", crudSetting, map);
     }
 

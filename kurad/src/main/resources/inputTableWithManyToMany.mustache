@@ -1,16 +1,8 @@
 <tr id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
     <th><label for="{{model}}.{{name}}">{{name}}</label></th>
     <td>
-        @*
-        @select(
-                    bindForm("{{name}}.{{modelId}}"),
-                    options(models.crud.{{declaredClassName}}{{fileSuffix}}.options{{targetClassName}}),
-                    '_label -> None, '_default -> "-- Choose a {{name}} --",
-                    '_showConstraints -> false
-                )
-        *@
         @* TODO ADD RELATION < *@
-        @models.crud.{{declaredClassName}}{{fileSuffix}}.options{{targetClassName}}.iterator.zipWithIndex.map { case(v, i) =>
+        @models.crud.{{declaredClassName}}{{crudSetting.fileSuffix}}.options{{targetClassName}}.iterator.zipWithIndex.map { case(v, i) =>
             <input type="checkbox" id="{{name}}_id_@v._1" name="{{name}}Ids[@i]" value="@v._1">
             <label for="{{name}}_id_@v._1">@v._2</label>
         }

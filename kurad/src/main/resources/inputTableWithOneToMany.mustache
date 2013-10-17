@@ -1,7 +1,20 @@
+@*
 <tr id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
     <th><label for="{{model}}.{{name}}">{{name}}</label></th>
     <td>
         <input class="{{inputOption.inputClass}}" type="text" name="{{name}}" value="@bindForm("{{name}}").value" id="{{model}}.{{name}}" />
         @if(!bindForm("{{name}}").errors().isEmpty()) { @Messages(bindForm("{{name}}").errors().get(0).message()) }
+    </td>
+</tr>
+*@
+<tr id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
+    <th><label for="{{model}}.{{name}}">{{name}}</label></th>
+    <td>
+        @* TODO ADD RELATION < *@
+        @models.crud.{{declaredClassName}}{{crudSetting.serviceSuffix}}.options{{targetClassName}}.iterator.zipWithIndex.map { case(v, i) =>
+            <input type="checkbox" id="{{name}}_id_@v._1" name="{{name}}Ids[@i]" value="@v._1">
+            <label for="{{name}}_id_@v._1">@v._2</label>
+        }
+        @* TODO ADD RELATION > *@
     </td>
 </tr>

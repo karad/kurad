@@ -78,13 +78,19 @@ public class FormWriter {
                     break;
                 }
                 if (annotation instanceof javax.persistence.OneToMany) {
+                    ParameterizedType parameterizedType  = (ParameterizedType)field.getGenericType();
+                    Class paramCls = (Class)parameterizedType.getActualTypeArguments()[0];
+                    String targetClassName = paramCls.getSimpleName();
+                    String declaredClassName = field.getDeclaringClass().getSimpleName();
                     // System.out.println("[CRUD:Field] " + field.getName() + " / " + "OneToMany");
-                    result = getInputTextFromTemplateByTableWithOneToMany(field.getName(), field.getDeclaringClass().getName(), crudSetting);
+                    result = getInputTextFromTemplateByTableWithOneToMany(field.getName(), field.getDeclaringClass().getName(), targetClassName, declaredClassName, crudSetting);
                     break;
                 }
                 if (annotation instanceof javax.persistence.OneToOne) {
+                    String targetClassName = field.getType().getSimpleName();
+                    String declaredClassName = field.getDeclaringClass().getSimpleName();
                     // System.out.println("[CRUD:Field] " + field.getName() + " / " + "OneToOne");
-                    result = getInputTextFromTemplateByTableWithOneToOne(field.getName(), field.getDeclaringClass().getName(), crudSetting);
+                    result = getInputTextFromTemplateByTableWithOneToOne(field.getName(), field.getDeclaringClass().getName(), targetClassName, declaredClassName, crudSetting);
                     break;
                 }
             }
@@ -281,6 +287,8 @@ public class FormWriter {
         map.put("declaredClassName", declaredClassName);
         map.put("inputOption", inputSetting);
         map.put("modelId", crudSetting.getModelId());
+        map.put("crudSetting", crudSetting);
+
         String templateName = "inputTableWithManyToOne";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }
@@ -304,6 +312,7 @@ public class FormWriter {
         map.put("targetClassName", targetClassName);
         map.put("declaredClassName", declaredClassName);
         map.put("modelId", crudSetting.getModelId());
+        map.put("crudSetting", crudSetting);
         String templateName = "inputTableWithManyToMany";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }
@@ -315,13 +324,17 @@ public class FormWriter {
      * @param crudSetting
      * @return
      */
-    private static String getInputTextFromTemplateByTableWithOneToMany(String name, String model, CrudSetting crudSetting) {
+    private static String getInputTextFromTemplateByTableWithOneToMany(String name, String model, String targetClassName, String declaredClassName, CrudSetting crudSetting) {
         String result = "";
         InputSetting inputSetting = new InputSetting();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", name);
         map.put("model", model);
         map.put("inputOption", inputSetting);
+        map.put("modelId", crudSetting.getModelId());
+        map.put("targetClassName", targetClassName);
+        map.put("declaredClassName", declaredClassName);
+        map.put("crudSetting", crudSetting);
         String templateName = "inputTableWithOneToMany";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }
@@ -333,13 +346,17 @@ public class FormWriter {
      * @param crudSetting
      * @return
      */
-    private static String getInputTextFromTemplateByTableWithOneToOne(String name, String model, CrudSetting crudSetting) {
+    private static String getInputTextFromTemplateByTableWithOneToOne(String name, String model, String targetClassName, String declaredClassName, CrudSetting crudSetting) {
         String result = "";
         InputSetting inputSetting = new InputSetting();
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("name", name);
         map.put("model", model);
         map.put("inputOption", inputSetting);
+        map.put("modelId", crudSetting.getModelId());
+        map.put("targetClassName", targetClassName);
+        map.put("declaredClassName", declaredClassName);
+        map.put("crudSetting", crudSetting);
         String templateName = "inputTableWithOneToOne";
         return DefaultTemplate.view(templateName, crudSetting, map);
     }

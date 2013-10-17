@@ -1,5 +1,6 @@
 package {{crudSetting.servicePackage}};
 
+import com.avaje.ebean.Ebean;
 import java.util.*;
 import javax.persistence.*;
 import play.db.ebean.*;
@@ -96,7 +97,7 @@ public class {{crudSetting.serviceClass}}{{crudSetting.serviceSuffix}} {
              * {{model}} {{member}}
              */
             Model.Finder<Long, {{model}}> {{member}}Finder = new Model.Finder<Long, {{model}}>(Long.class, {{model}}.class);
-            for (int i = 0; i < {{model}}{{crudSetting.modelSuffix}}.all().size(); i++) {
+            for (int i = 0; i < {{model}}{{crudSetting.serviceSuffix}}.all().size(); i++) {
                 if(bindForm.field("{{member}}Ids[" + i + "]").value() != null) {
                     model.{{member}}.add({{member}}Finder.by{{crudSetting.modelIdUpperCase}}(Long.valueOf(bindForm.field("{{member}}Ids[" + i + "]").value())));
                 }
@@ -137,7 +138,9 @@ public class {{crudSetting.serviceClass}}{{crudSetting.serviceSuffix}} {
                 /**
                  * {{model}} {{member}}
                  */
-                Ebean.deleteManyToManyAssociations(model, "{{member}}");
+                if(model.{{member}} != null && model.{{member}}.size() > 0) {
+                    Ebean.deleteManyToManyAssociations(model, "{{member}}");
+                }
                 Model.Finder<Long, {{model}}> {{member}}Finder = new Model.Finder<Long, {{model}}>(Long.class, {{model}}.class);
                 for (int i = 0; i < {{model}}{{crudSetting.serviceSuffix}}.all().size(); i++) {
                     if(bindForm.field("{{member}}Ids[" + i + "]").value() != null) {

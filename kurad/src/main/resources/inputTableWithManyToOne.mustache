@@ -3,7 +3,7 @@
     <td>
         @select(
                     bindForm("{{name}}.{{modelId}}"),
-                    options(models.crud.{{declaredClassName}}{{fileSuffix}}.options{{targetClassName}}),
+                    options(models.crud.{{declaredClassName}}{{crudSetting.fileSuffix}}.options{{targetClassName}}),
                     '_label -> None, '_default -> "-- Choose a {{name}} --",
                     '_showConstraints -> false
                 )

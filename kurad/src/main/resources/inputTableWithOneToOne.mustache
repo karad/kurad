@@ -1,3 +1,4 @@
+@*
 <tr id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
     <th><label for="{{model}}.{{name}}">{{name}}</label></th>
     <td>
@@ -5,4 +6,15 @@
         @if(!bindForm("{{name}}").errors().isEmpty()) { @Messages(bindForm("{{name}}").errors().get(0).message()) }
     </td>
 </tr>
-
+*@
+<tr id="{{inputOption.wrappedId}}" class="{{inputOption.wrappedClass}}">
+    <th><label for="{{model}}.{{name}}">{{name}}</label></th>
+    <td>
+        @select(
+                    bindForm("{{name}}.{{modelId}}"),
+                    options(models.crud.{{declaredClassName}}{{crudSetting.serviceSuffix}}.options{{targetClassName}}),
+                    '_label -> None, '_default -> "-- Choose a {{name}} --",
+                    '_showConstraints -> false
+                )
+    </td>
+</tr>

@@ -73,7 +73,6 @@ public class ServiceWriter extends DefaultWriter {
      * @return
      */
     public List<String> apply(String baseName, String path, CrudSetting crudSetting) {
-        String templateName = "";
         return apply(baseName + crudSetting.getExtension(), path, crudSetting.getServiceTemplate(), crudSetting, new LinkedHashMap<String, String>());
     }
 

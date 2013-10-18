@@ -133,11 +133,11 @@ public class FormWriter {
                     break;
                 }
                 if (annotation instanceof javax.persistence.OneToMany) {
-                    result = getDisplayFieldFromTemplateByTable(field.getName(), field.getDeclaringClass().getName(), crudSetting);
+                    result = getDisplayFieldFromTemplateByTableWithManyToMany(field.getName(), field.getDeclaringClass().getName(), targetClassName, declaredClassName, crudSetting);
                     break;
                 }
                 if (annotation instanceof javax.persistence.OneToOne) {
-                    result = getDisplayFieldFromTemplateByTable(field.getName(), field.getDeclaringClass().getName(), crudSetting);
+                    result = getDisplayFieldFromTemplateByTableWithManyToOne(field.getName(), field.getDeclaringClass().getName(), targetClassName, declaredClassName, crudSetting);
                     break;
                 }
             }

@@ -2,7 +2,7 @@ package jp.greative.kurad
 
 import sbt._
 import Keys._
-import jp.greative.kurad.app.controller.{AdminController, TemplateController, CrudController}
+import jp.greative.kurad.app.controller.{DeleteAllController, AdminController, TemplateController, CrudController}
 import jp.greative.kurad.app.model.mode.Mode
 import sbt.complete.Parser
 
@@ -14,7 +14,7 @@ object KuradPlugin extends Plugin {
     import sbt.complete.DefaultParsers._
     val modes = modeList.map(m => token(m).map(Mode.is)).reduce(_ | _)
     val modeParser = (Space ~> modes) ~ (Space ~> token(NotSpace, "<model-name>"))
-    val other = Space ~> (token("template") | token("admin"))
+    val other = Space ~> (token("template") | token("admin") | token("deleteAll"))
     modeParser || other
   }
 
@@ -47,6 +47,11 @@ object KuradPlugin extends Plugin {
           println( Colors.cyan("[mode]   ") + mode )
           println("--------------------------------------------------------------")
           println( AdminController.apply() )
+        }
+        case Right(mode @ "deleteAll") => {
+          println( Colors.cyan("[mode]   ") + mode )
+          println("--------------------------------------------------------------")
+          println( DeleteAllController.apply() )
         }
         case _ => {
           println("Kurad tool invalid args.")

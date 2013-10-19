@@ -57,7 +57,9 @@ public class DeleteAllController extends DefaultController {
     public static CrudResult delete(CrudSetting crudSetting) {
         CrudResult result = new CrudResult();
         result.add("delete all files..." + FileUtil.LINE_SEPARATOR);
-        result.addAll(deleteDirectory(crudSetting.getModelPath()));
+        result.addAll(deleteDirectory(crudSetting.getServicePath()));
+        result.addAll(deleteDirectory(crudSetting.getControllerPath()));
+        result.addAll(deleteDirectory(crudSetting.getViewPath()));
         return result;
     }
 

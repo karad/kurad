@@ -11,10 +11,12 @@ import jp.greative.kurad.framework.setting.GlobalSetting;
 import jp.greative.kurad.framework.setting.Setting;
 import jp.greative.util.FileUtil;
 import jp.greative.util.ModelUtil;
+import org.apache.commons.lang3.StringUtils;
 import play.libs.F;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -66,36 +68,39 @@ public class DeleteAllController extends DefaultController {
     public static List<String> deleteDirectory(String path) {
         String rightPath = pathSeparatorEndWith(path);
         File file = new File(rightPath);
-        deleteDirectoryOrFile(file);
         ArrayList<String> result = new ArrayList<String>();
-        result.add(Colors.green("[kurad : deleted  file] ") + rightPath);
+        deleteDirectoryOrFile(file, result);
         return result;
     }
 
     public static String pathSeparatorEndWith(String path) {
         if(path.endsWith("/")) {
-            return path;
+            return StringUtils.stripEnd(path, "/");
         } else {
-            return path + "/";
+            return path;
         }
     }
 
-    public static void deleteDirectoryOrFile(File directoryOrFile) {
+    public static List<String> deleteDirectoryOrFile(File directoryOrFile, List<String> result) {
         if (!directoryOrFile.exists()) {
-            return;
+            return result;
         }
 
-        if (directoryOrFile.isFile()) {
-            directoryOrFile.delete();
+        if (directoryOrFile.isFile() && directoryOrFile.delete()) {
+            result.add(Colors.green("[kurad : deleted  file] ") + directoryOrFile.getPath());
         }
 
-        if (directoryOrFile.isDirectory()) {
-            File[] files = directoryOrFile.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                files[i].delete();
+        File[] tmpFiles = directoryOrFile.listFiles();
+        if (directoryOrFile.isDirectory() && tmpFiles != null) {
+            List<File> files = Arrays.asList(tmpFiles);
+            for (File file : files) {
+                deleteDirectoryOrFile(file, result);
             }
-            directoryOrFile.delete();
+            if(directoryOrFile.delete()) {
+                result.add(Colors.green("[kurad : deleted  file] ") + directoryOrFile.getPath());
+            }
         }
+        return result;
     }
 
 }

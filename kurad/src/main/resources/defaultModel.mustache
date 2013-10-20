@@ -86,9 +86,9 @@ public class {{crudSetting.serviceClass}}{{crudSetting.serviceSuffix}} {
      */
     public static {{crudSetting.modelClass}} create({{crudSetting.modelClass}} model, play.data.Form<{{crudSetting.modelClass}}> bindForm) {
         model.setCreated(DateUtil.getCurrentDate());
-        {{#if crudSetting.modelHasModified}}
+        {{#crudSetting.modelHasModified}}
         model.setModified(model.getCreated());
-        {{/if crudSetting.modelHasModified}}
+        {{/crudSetting.modelHasModified}}
         model.save();
 
         if(bindForm != null) {
@@ -127,9 +127,9 @@ public class {{crudSetting.serviceClass}}{{crudSetting.serviceSuffix}} {
         }
         if(entry != null) {
             model.set{{crudSetting.modelIdUpperCase}}(id);
-            {{#if crudSetting.modelHasModified}}
+            {{#crudSetting.modelHasModified}}
             model.setModified(DateUtil.getCurrentDate());
-            {{/if crudSetting.modelHasModified}}
+            {{/crudSetting.modelHasModified}}
             //
             model.update();
 

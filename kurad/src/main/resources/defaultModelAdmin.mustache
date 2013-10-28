@@ -27,11 +27,15 @@ public class Admin extends Model {
   @Constraints.Required
   public String password;
 
+{{#if crudSetting.modelHasCreated}}
   @Formats.DateTime(pattern = "dd/MM/yyyy")
   public Date created; // timestamp
+{{/if crudSetting.modelHasCreated}}
 
+{{#if crudSetting.modelHasModified}}
   @Formats.DateTime(pattern = "dd/MM/yyyy")
   public Date modified; // timestamp
+{{/if crudSetting.modelHasModified}}
 
   public Long get{{crudSetting.modelIdUpperCase}}() {
     return {{crudSetting.modelId}};
@@ -57,6 +61,7 @@ public class Admin extends Model {
     this.password = password;
   }
 
+{{#if crudSetting.modelHasCreated}}
   public Date getCreated() {
     return created;
   }
@@ -64,14 +69,16 @@ public class Admin extends Model {
   public void setCreated(Date created) {
     this.created = created;
   }
+{{/if crudSetting.modelHasCreated}}
 
+{{#if crudSetting.modelHasModified}}
+    public Date getModified() {
+        return modified;
+    }
 
-  public Date getModified() {
-    return modified;
-  }
-
-  public void setModified(Date modified) {
-    this.modified = modified;
-  }
+    public void setModified(Date modified) {
+        this.modified = modified;
+    }
+{{/if crudSetting.modelHasModified}}
 
 }

@@ -10,7 +10,7 @@ object ApplicationBuild extends Build {
   import Dependencies._
 
   val appName         = "kurad_app"
-  val appVersion      = "0.1.6"
+  val appVersion      = "0.2.0"
   val releases        = "/Users/harakazuhiro/gitrepo/maven-repo/release"
   val snapshot        = "/Users/harakazuhiro/gitrepo/maven-repo/snapshots"
   val mavenRepository = if (appVersion.endsWith("SNAPSHOT")) snapshot else releases
@@ -33,7 +33,7 @@ object ApplicationBuild extends Build {
     file("kurad"),
     settings = Defaults.defaultSettings ++ Seq(
       sbtPlugin := true,
-      version := "0.1.6",
+      version := "0.2.0",
       //scalaBinaryVersion  := CrossVersion.binaryScalaVersion("2.9.2"),
       organization := "jp.greative",
       publishMavenStyle := true,

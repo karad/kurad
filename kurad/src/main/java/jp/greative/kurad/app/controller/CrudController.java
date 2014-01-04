@@ -144,20 +144,6 @@ public class CrudController extends DefaultController {
         result.addAll(new ViewWriter().apply("detail", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
         result.addAll(new ViewWriter().apply("search", crudSetting.getViewPath() + FileUtil.DIR_SEPARATOR + crudSetting.getModelClass(), crudSetting));
 
-        // routes
-
-        // add route for crud
-        result.addAll(new RouteWriter().apply("routes", "conf", crudSetting));
-        // add route for crud top page
-        CrudSetting crudTopSetting = new CrudSetting();
-        crudTopSetting.setControllerClass("Top");
-        crudTopSetting.setTemplatePath(crudSetting.getTemplatePath());
-        result.addAll(new RouteTopWriter().apply("routes", "conf", crudTopSetting));
-        CrudSetting crudLoginSetting = new CrudSetting();
-        crudLoginSetting.setControllerClass("Admin");
-        crudLoginSetting.setTemplatePath(crudSetting.getTemplatePath());
-        result.addAll(new RouteLoginWriter().apply("routes", "conf", crudLoginSetting));
-
         // statics
         // other files
 
@@ -166,21 +152,33 @@ public class CrudController extends DefaultController {
         viewTopSetting.setTemplatePath("app/templates");
         viewTopSetting.setTemplateBasename("defaultViewTop");
         viewTopSetting.setExtension(".scala.html");
-        result.addAll(new FileWriter().apply("top_crud", "app/views/crud", viewTopSetting, crudSetting));
+        result.addAll(new FileWriter().apply("top_crud", crudSetting.getViewPath(), viewTopSetting, crudSetting));
 
         // view main
         FileLocalSetting viewMainSetting = new FileLocalSetting();
         viewMainSetting.setTemplatePath("app/templates");
         viewMainSetting.setTemplateBasename("defaultViewMain");
         viewMainSetting.setExtension(".scala.html");
-        result.addAll(new FileWriter().apply("main_crud", "app/views/crud", viewMainSetting, crudSetting));
+        result.addAll(new FileWriter().apply("main_crud", crudSetting.getViewPath(), viewMainSetting, crudSetting));
 
         // view login
         FileLocalSetting viewLoginSetting = new FileLocalSetting();
         viewMainSetting.setTemplatePath("app/templates");
         viewMainSetting.setTemplateBasename("defaultViewLogin");
         viewMainSetting.setExtension(".scala.html");
-        result.addAll(new FileWriter().apply("login_crud", "app/views/crud", viewMainSetting, crudSetting));
+        result.addAll(new FileWriter().apply("login_crud", crudSetting.getViewPath(), viewMainSetting, crudSetting));
+
+        // routes
+
+        // add route for crud
+        result.addAll(new RouteWriter().apply("routes", "conf", crudSetting));
+        // add route for crud top page
+        crudSetting.setControllerClass("Top");
+        crudSetting.setTemplatePath(crudSetting.getTemplatePath());
+        result.addAll(new RouteTopWriter().apply("routes", "conf", crudSetting));
+        crudSetting.setControllerClass("Admin");
+        crudSetting.setTemplatePath(crudSetting.getTemplatePath());
+        result.addAll(new RouteLoginWriter().apply("routes", "conf", crudSetting));
 
         return result;
     }
@@ -288,12 +286,6 @@ public class CrudController extends DefaultController {
         // Secured.java
         result.addAll(new ServiceWriter().apply("Secured" + crudSetting.getExtension(), crudSetting.getServicePath(), "defaultSecured", crudSetting, new LinkedHashMap<String, String>()));
 
-        // routes
-
-        CrudSetting crudTopSetting = new CrudSetting();
-        crudTopSetting.setControllerClass("Top");
-        result.addAll(new RouteTopWriter().apply("routes", "conf", crudTopSetting));
-
         // statics
 
         // other files
@@ -303,21 +295,26 @@ public class CrudController extends DefaultController {
         viewTopSetting.setTemplatePath("app/templates");
         viewTopSetting.setTemplateBasename("defaultViewTop");
         viewTopSetting.setExtension(".scala.html");
-        result.addAll(new FileWriter().apply("top_crud", "app/views/crud", viewTopSetting, crudSetting));
+        result.addAll(new FileWriter().apply("top_crud", crudSetting.getViewPath(), viewTopSetting, crudSetting));
 
         // view main
         FileLocalSetting viewMainSetting = new FileLocalSetting();
         viewMainSetting.setTemplatePath("app/templates");
         viewMainSetting.setTemplateBasename("defaultViewMain");
         viewMainSetting.setExtension(".scala.html");
-        result.addAll(new FileWriter().apply("main_crud", "app/views/crud", viewMainSetting, crudSetting));
+        result.addAll(new FileWriter().apply("main_crud", crudSetting.getViewPath(), viewMainSetting, crudSetting));
 
         // view login
         FileLocalSetting viewLoginSetting = new FileLocalSetting();
         viewMainSetting.setTemplatePath("app/templates");
         viewMainSetting.setTemplateBasename("defaultViewLogin");
         viewMainSetting.setExtension(".scala.html");
-        result.addAll(new FileWriter().apply("login_crud", "app/views/crud", viewMainSetting, crudSetting));
+        result.addAll(new FileWriter().apply("login_crud", crudSetting.getViewPath(), viewMainSetting, crudSetting));
+
+        // routes
+        crudSetting.setControllerClass("Top");
+        result.addAll(new RouteTopWriter().apply("routes", "conf", crudSetting));
+
 
         return result;
     }
@@ -334,14 +331,12 @@ public class CrudController extends DefaultController {
         // add route for crud
         result.addAll(new RouteWriter().apply("routes", "conf", crudSetting));
         // add route for crud top page
-        CrudSetting crudTopSetting = new CrudSetting();
-        crudTopSetting.setControllerClass("Top");
-        crudTopSetting.setTemplatePath(crudSetting.getTemplatePath());
-        result.addAll(new RouteTopWriter().apply("routes", "conf", crudTopSetting));
-        CrudSetting crudLoginSetting = new CrudSetting();
-        crudLoginSetting.setControllerClass("Admin");
-        crudLoginSetting.setTemplatePath(crudSetting.getTemplatePath());
-        result.addAll(new RouteLoginWriter().apply("routes", "conf", crudLoginSetting));
+        crudSetting.setControllerClass("Top");
+        crudSetting.setTemplatePath(crudSetting.getTemplatePath());
+        result.addAll(new RouteTopWriter().apply("routes", "conf", crudSetting));
+        crudSetting.setControllerClass("Admin");
+        crudSetting.setTemplatePath(crudSetting.getTemplatePath());
+        result.addAll(new RouteLoginWriter().apply("routes", "conf", crudSetting));
         return result;
     }
 

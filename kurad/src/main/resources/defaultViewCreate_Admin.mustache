@@ -1,0 +1,67 @@
+@(title:String, bindForm:Form[{{crudSetting.modelPackage}}.{{crudSetting.modelClass}}])
+
+@import helper._
+@import views.html.crud._
+
+@main_crud(title) {
+
+<h1>@title</h1>
+
+@if(flash.containsKey("success")) {
+    <p class="success alert alert-success">
+        <strong>@flash.get("success")</strong>
+    </p>
+} 
+@if(flash.containsKey("error")) {
+    <p class="error alert alert-error">
+        <strong>@flash.get("error")</strong>
+    </p>
+} 
+
+
+  @form(action = helper.CSRF(controllers.crud.routes.{{crudSetting.controllerClass}}.create())) {
+  <table class="table table-bordered">
+    <tbody>
+      <tr id="" class="">
+          <th><label for="models.Admin.{{crudSetting.modelId}}">{{crudSetting.modelId}}</label></th>
+          <td>
+              <input class="" type="text" name="{{crudSetting.modelId}}" value="@bindForm("{{crudSetting.modelId}}").value" id="models.Admin.{{crudSetting.modelId}}" />
+              @if(!bindForm("{{crudSetting.modelId}}").errors().isEmpty()) { @Messages(bindForm("{{crudSetting.modelId}}").errors().get(0).message()) }
+          </td>
+      </tr>
+
+      <tr id="" class="">
+          <th><label for="models.Admin.username">username</label></th>
+          <td>
+              <input class="" type="text" name="username" value="@bindForm("username").value" id="models.Admin.username" />
+              @if(!bindForm("username").errors().isEmpty()) { @Messages(bindForm("username").errors().get(0).message()) }
+          </td>
+      </tr>
+
+      <tr id="" class="">
+          <th><label for="models.Admin.password">password</label></th>
+          <td>
+              <input class="" type="password" name="password" value="@bindForm("password").value" id="models.Admin.password" />
+              @if(!bindForm("password").errors().isEmpty()) { @Messages(bindForm("password").errors().get(0).message()) }
+          </td>
+      </tr>
+
+      <tr id="" class="">
+          <th><label for="models.Admin.created">created</label></th>
+          <td>
+              <input class="" type="text" name="created" value="@bindForm("created").value" id="models.Admin.created" />
+              @if(!bindForm("created").errors().isEmpty()) { @Messages(bindForm("created").errors().get(0).message()) }
+          </td>
+      </tr>
+      <tr>
+        <th></th>
+        <td><input type="submit" value="Create" class="btn"></td>
+      </tr>
+    </tbody>
+  </table>
+  }
+
+  <p><a class="btn btn-primary" href="@controllers.crud.routes.{{crudSetting.controllerClass}}.index(1)">&lt; {{crudSetting.modelClass}} Top</a></p>
+
+
+}

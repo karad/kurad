@@ -4,4 +4,12 @@ env:
 before_script:
   - wget http://downloads.typesafe.com/play/${PLAY_VERSION}/play-${PLAY_VERSION}.zip
   - unzip -q play-${PLAY_VERSION}.zip
+  - export SCALA_VERSION=2.10
+  - export MAVEN_PLAY=http://repo.typesafe.com/typesafe/maven-releases/com/typesafe/play/play_${SCALA_VERSION}/${PLAY_VERSION}/play_${SCALA_VERSION}-${PLAY_VERSION}
+  - export LOCAL_REPO=play-${PLAY_VERSION}/repository/local/com.typesafe.play/play_${SCALA_VERSION}/${PLAY_VERSION}
+  - mkdir ${LOCAL_REPO}/srcs/ ${LOCAL_REPO}/poms/
+  - wget ${MAVEN_PLAY}.pom --output-document ${LOCAL_REPO}/poms/play_${SCALA_VERSION}.pom
+  - wget ${MAVEN_PLAY}-sources.jar --output-document ${LOCAL_REPO}/srcs/play_${SCALA_VERSION}-sources.jar
+  - wget ${MAVEN_PLAY}-test-sources.jar --output-document ${LOCAL_REPO}/srcs/play_${SCALA_VERSION}-test-sources.jar
+
 script: play-${PLAY_VERSION}/play test

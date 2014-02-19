@@ -47,7 +47,7 @@ object ApplicationBuild extends Build {
   object Dependencies {
 
     val sbtDependencies = Seq(
-        "com.typesafe.play" %% "play" % "2.2.0"
+        "com.typesafe.play" %% "play" % "2.2.1"
         ,
         "com.novocode" % "junit-interface" % "0.8" % "test"
         ,

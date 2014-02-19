@@ -22,7 +22,8 @@ public class DeleteAllControllerTest {
             dir.mkdir();
         }
         File file = new File("kurad/src/test/resources/tmptest/hoge.txt");
-        file.createNewFile();
+        Boolean isFile = file.createNewFile();
+        System.out.println("isFile -> " + isFile);
         List<String> result = DeleteAllController.deleteDirectory("kurad/src/test/resources/tmptest");
         System.out.println(result);
     }

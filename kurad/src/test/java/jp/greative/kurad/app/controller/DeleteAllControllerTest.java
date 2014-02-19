@@ -30,19 +30,19 @@ public class DeleteAllControllerTest {
     @Test
     public void testPathSeparatorEndWith001() throws Exception {
         String result = DeleteAllController.pathSeparatorEndWith("/foo/bar");
-        assertThat(result, IsEqual.equalTo("/foo/bar/"));
+        assertThat(result, IsEqual.equalTo("/foo/bar"));
     }
 
     @Test
     public void testPathSeparatorEndWith002() throws Exception {
         String result = DeleteAllController.pathSeparatorEndWith("/foo/bar/");
-        assertThat(result, IsEqual.equalTo("/foo/bar/"));
+        assertThat(result, IsEqual.equalTo("/foo/bar"));
     }
 
     @Test
     public void testPathSeparatorEndWith003() throws Exception {
         String result = DeleteAllController.pathSeparatorEndWith("/foo/bar//");
-        assertThat(result, IsEqual.equalTo("/foo/bar//"));
+        assertThat(result, IsEqual.equalTo("/foo/bar"));
     }
 
     @Test

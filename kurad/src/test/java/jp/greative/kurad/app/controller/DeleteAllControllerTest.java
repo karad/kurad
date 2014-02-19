@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2013/10/18 23:09
  */
 public class DeleteAllControllerTest {
-    @Test
+    //@Test
     public void testDeleteDirectory() throws Exception {
         File dir = new File("kurad/src/test/resources/tmptest");
         if(!dir.exists()) {

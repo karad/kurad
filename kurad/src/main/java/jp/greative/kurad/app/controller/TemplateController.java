@@ -26,24 +26,24 @@ public class TemplateController {
             add("defaultCreate.mustache");
             add("defaultDelete.mustache");
             add("defaultIndex.mustache");
-            add("defaultModel_Admin.mustache");
             add("defaultModel.mustache");
+            add("defaultModel_Admin.mustache");
             add("defaultModelAdmin.mustache");
             add("defaultSearch.mustache");
             add("defaultSecured.mustache");
             add("defaultTopController.mustache");
             add("defaultUpdate.mustache");
             add("defaultView.mustache");
-            add("defaultViewCreate_Admin.mustache");
             add("defaultViewCreate.mustache");
+            add("defaultViewCreate_Admin.mustache");
             add("defaultViewDetail.mustache");
             add("defaultViewIndex.mustache");
             add("defaultViewLogin.mustache");
             add("defaultViewMain.mustache");
             add("defaultViewSearch.mustache");
             add("defaultViewTop.mustache");
-            add("defaultViewUpdate_Admin.mustache");
             add("defaultViewUpdate.mustache");
+            add("defaultViewUpdate_Admin.mustache");
             add("inputNormal.mustache");
             add("inputTable.mustache");
             add("inputTableWithManyToMany.mustache");
@@ -98,7 +98,7 @@ public class TemplateController {
                     return result.report();
                 }
             }
-            FileUtil.copyFileFromResource(writePath + FileUtil.DIR_SEPARATOR + file, readPath + FileUtil.DIR_SEPARATOR + file, null);
+            FileUtil.copyFileFromResource(writePath + FileUtil.DIR_SEPARATOR + file, readPath + FileUtil.RESOURCE_SEPARATOR + file, null);
             result.add(Colors.green("[kurad : created file] ") + writePath + FileUtil.DIR_SEPARATOR + file);
         }
         return result.report();

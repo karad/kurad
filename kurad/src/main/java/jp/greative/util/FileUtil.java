@@ -14,6 +14,7 @@ public class FileUtil {
 
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     public static final String DIR_SEPARATOR = System.getProperty("file.separator");
+    public static final String RESOURCE_SEPARATOR = "/";
     public static final String TEMPLATE_SEPARATOR = "_";
     public static final String CHARSET = "UTF-8";
 
@@ -52,6 +53,7 @@ public class FileUtil {
      *
      * @param fromPath
      * @param toPath
+     * @param localSetting
      * @throws java.io.IOException
      */
     public static Boolean copyFileFromResource(String toPath, String fromPath, Setting localSetting) throws IOException {
